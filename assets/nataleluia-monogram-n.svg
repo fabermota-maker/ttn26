@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 520" role="img" aria-label="Nataleluia">
+  <g fill="none" stroke="#e2b1a6" stroke-linecap="round" stroke-linejoin="round">
+    <path
+      d="M88 58 C42 118, 34 198, 58 286 C74 344, 108 392, 152 430"
+      stroke-width="2.2"
+    />
+    <path
+      d="M152 58 C198 118, 206 198, 182 286 C166 344, 132 392, 88 430"
+      stroke-width="2.2"
+    />
+    <path
+      d="M88 58 L152 430"
+      stroke-width="2.2"
+    />
+    <path
+      d="M152 58 C214 96, 248 154, 248 224 C248 294, 214 352, 152 390"
+      stroke-width="2.2"
+    />
+    <path
+      d="M248 224 C286 250, 302 286, 302 332 C302 378, 276 414, 236 448"
+      stroke-width="2.2"
+    />
+  </g>
+</svg>
