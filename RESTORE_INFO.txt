@@ -1,0 +1,7 @@
+﻿RESTORE POINT
+=============
+Created: 2026-08-27 21:38:36
+Git commit: 58971dd
+Purpose: Backup de seguranca da LP Nataleluia antes de alteracoes futuras.
+
+Para restaurar manualmente, copie o conteudo desta pasta de volta para a raiz do projeto.

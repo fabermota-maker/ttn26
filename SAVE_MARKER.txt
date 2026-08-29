@@ -1,0 +1,12 @@
+﻿SAVE_MARKER - LP Nataleluia (backup local)
+Timestamp: 2026-08-27 22:58:14 -03:00
+Canonical: B (2026_WEB DESIGN) - has .git
+Commit: 01952de
+Message: Save Nataleluia LP with local media and 2026 | 1997 timeline.
+Paths:
+A) G:\Drives compartilhados\Marketing\03 - Criação\00 2026 DG\2026 WEB DESIGN\WD LP Nataleluia
+B) G:\Drives compartilhados\Marketing\03 - Criação\00 2026 DG\2026_WEB DESIGN\WD LP Nataleluia
+C) G:\Drives compartilhados\Marketing\03 - Criação\00 2026 DG\2026_WEB DESIGN\TT web cursor\nataleluia-lp
+Included: estrutura lp-master, src/lp_nataleluia_landing_page.jsx, assets/images+icons, restore/2026-08-27_22-24
+Synced: A<->B (mirror), B->C (merge, preserva extras locais em C)
+No push. Origin CLI not used.
