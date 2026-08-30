@@ -4,8 +4,8 @@ const LOGO_URL = "https://nataleluia.com.br/wp-content/uploads/2024/09/natalelui
 const HERO_VIDEO_URL = "https://nataleluia.com.br/wp-content/uploads/2024/09/WhatsApp-Video-2024-09-02-at-15.38.48.mp4";
 const CHURCH_LOGO_URL = "https://pibcuritiba.org.br/wp-content/uploads/2016/07/logo_peq.png";
 const TIMELINE_SELECTED_BG_URL = "https://live.staticflickr.com/65535/55005691814_c0d8c37fbc.jpg";
-const COMPROMISSO_ADORACAO_LOGO_URL = "/assets/images/compromisso-adoracao-logo.png?v=3";
-const SPONSOR_MONOGRAM_URL = "/assets/icons/nataleluia-monogram-n.png";
+const COMPROMISSO_ADORACAO_LOGO_URL = "./assets/images/compromisso-adoracao-logo.png?v=3";
+const SPONSOR_MONOGRAM_URL = "./assets/icons/nataleluia-monogram-n.png";
 
 const TIMELINE_2022_CARD_IMAGE_URL = `data:image/svg+xml,${encodeURIComponent(`
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="25 anos">
@@ -219,7 +219,7 @@ const sponsors = [
   {
     id: "sevenpass",
     label: "SevenPass",
-    src: "/assets/images/logo-sevenpass.png",
+    src: "./assets/images/logo-sevenpass.png",
   },
 ];
 
@@ -667,12 +667,12 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
       image: TIMELINE_2022_CARD_IMAGE_URL,
       bgImage: "https://nataleluia.com.br/wp-content/uploads/2024/09/52615653741_7fb121d085_o.jpg",
     },
-    { year: "2021", title: "Um lugar para Nascer", image: "/assets/images/timeline-2021-um-lugar-para-nascer.png" },
-    { year: "2020", title: "Um Olhar para o Céu", image: "/assets/images/timeline-2020-um-olhar-para-o-ceu.png" },
+    { year: "2021", title: "Um lugar para Nascer", image: "./assets/images/timeline-2021-um-lugar-para-nascer.png" },
+    { year: "2020", title: "Um Olhar para o Céu", image: "./assets/images/timeline-2020-um-olhar-para-o-ceu.png" },
     {
       year: "2019",
       title: "O Esplendor do Natal",
-      image: "/assets/images/timeline-2019-o-esplendor-do-natal.png",
+      image: "./assets/images/timeline-2019-o-esplendor-do-natal.png",
       albumUrl: "https://www.flickr.com/photos/pibcuritiba/albums/72157712376913522/",
       description:
         "Com uma atmosfera de um programa de rádio apresentado na noite de Natal, belas canções natalinas e uma grande variedade de gêneros musicais, o radialista, por meio de sua locução, vai ensinando o verdadeiro significado da data, convidando os participantes a louvarem a Jesus, para comemorar o Esplendor do Natal.",
@@ -680,7 +680,7 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
     {
       year: "2018",
       title: "De Belén para a Cruz",
-      image: "/assets/images/timeline-2018-de-belen-para-a-cruz.png",
+      image: "./assets/images/timeline-2018-de-belen-para-a-cruz.png",
       albumUrl: "https://www.flickr.com/photos/pibcuritiba/albums/72157705235964215/page4",
       description:
         "Apresenta a mensagem de Natal com performances ao vivo e participação de mais de 700 voluntários. O evento reúne orquestra, teatro, dança, um grande coral e efeitos especiais. Ingressos pelo site nataleluia.com.br a partir do dia 01 de setembro de 2018.",
@@ -688,127 +688,127 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
     {
       year: "2017",
       title: "20 anos de história",
-      image: "/assets/images/timeline-2017-20-anos-de-historia.png",
+      image: "./assets/images/timeline-2017-20-anos-de-historia.png",
       albumUrl: "https://www.flickr.com/photos/pibcuritiba/albums/72157690172193431/with/25565657128/",
     },
     {
       year: "2016",
       title: "O Encontro",
-      image: "/assets/images/timeline-2016-o-encontro.png",
+      image: "./assets/images/timeline-2016-o-encontro.png",
       description:
         "Cerca de 500 voluntários: músicos, atores, cantores, roteiristas, cenógrafos, bailarinos, publicitários e muitos outros profissionais se unem para celebrar em Curitiba, o verdadeiro sentido do natal.\n\nUm público de mais de 45 mil pessoas já assistiram o evento e se emocionaram com as apresentações que já acontecem há mais de 15 anos e reúne: vídeo, teatro, dança, tecnologia, coral e orquestra em um musical que encanta a todas as idades.\n\nO Nataleluia já faz parte da agenda cultural de Curitiba, muito mais do que uma cantata de natal, o evento tem como objetivo também arrecadar alimentos para a confecção e distribuição de cestas básicas para a população carente.",
     },
     {
       year: "2015",
       title: "As Cores do Amanhã",
-      image: "/assets/images/timeline-2015-as-cores-do-amanha.png",
+      image: "./assets/images/timeline-2015-as-cores-do-amanha.png",
       description:
         "A história mostrou as aventuras de Aurora e seu irmão Felipe, que vivem em uma cidade cinza e triste onde ser feliz era proibido. Mas uma nova e colorida cidade surge. Neste local, eles aprenderam a cantar, sorrir, brincar e o verdadeiro significado do Natal.",
     },
     {
       year: "2014",
       title: "Natal de História",
-      image: "/assets/images/timeline-2014-natal-de-historia.png",
+      image: "./assets/images/timeline-2014-natal-de-historia.png",
       description:
         "Natal de histórias foi o tema do Nataleluia de 2014. Nele, três personagens encontraram-se para ouvir histórias de Jesus Cristo.",
     },
     {
       year: "2013",
       title: "Natal do Coração",
-      image: "/assets/images/timeline-2013-natal-do-coracao.png",
+      image: "./assets/images/timeline-2013-natal-do-coracao.png",
       description:
         "Em 2013, a história foi sobre um menino que era apaixonado por futebol, e tinha o sonho de ser jogador da seleção brasileira. No meio do caminho enfrentou muitos obstáculos até perceber a importância de Jesus na sua vida.",
     },
     {
       year: "2012",
       title: "Nasce a Esperança",
-      image: "/assets/images/timeline-2012-nasce-a-esperanca.png",
+      image: "./assets/images/timeline-2012-nasce-a-esperanca.png",
       description:
         "Três personagens são apresentados: Augusto, Sofia e Marina. Cada um deles ganhou de presente um livro mágico, que os levou a uma viagem ao passado, ao encontro de previsões feitas pelos profetas Isaías, Jeremias e Miqueias.",
     },
-    { year: "2011", title: "Noite de esperança.", image: "/assets/images/timeline-2011-noite-de-esperanca.png", description: "Na edição de 2011, a iluminação teve seu destaque, assim como a tecnologia de projeção chamada mapping. Todo o conceito do espetáculo, desde cenários até figurino, foi baseado no Cubo Rubik, ou Cubo mágico" },
-    { year: "2010", title: "Violeta Caron retorna à sua casa", image: "/assets/images/timeline-2010-violeta-caron-retorna-a-sua-casa.png" },
+    { year: "2011", title: "Noite de esperança.", image: "./assets/images/timeline-2011-noite-de-esperanca.png", description: "Na edição de 2011, a iluminação teve seu destaque, assim como a tecnologia de projeção chamada mapping. Todo o conceito do espetáculo, desde cenários até figurino, foi baseado no Cubo Rubik, ou Cubo mágico" },
+    { year: "2010", title: "Violeta Caron retorna à sua casa", image: "./assets/images/timeline-2010-violeta-caron-retorna-a-sua-casa.png" },
     {
       year: "2009",
       title: "Além do Espetáculo",
-      image: "/assets/images/timeline-2009-alem-do-espetaculo.png",
+      image: "./assets/images/timeline-2009-alem-do-espetaculo.png",
       description:
         "O templo da Primeira Igreja Batista (PIB) de Curitiba, no Batel, vai ser transformado em um grande teatro, com direito a cortina vermelha, cenário e efeitos de iluminação e de som. No palco, Demétrio, um talentoso ator, participa de um musical de Natal e, quando o show está quase terminando, percebe que está preso nele. Com a ajuda de contrarregras, o rapaz vai lutar para fugir do mundo da ficção e tirar as máscaras para encontrar o mundo real, no qual a sua vida tem um propósito que vai muito além do espetáculo.",
     },
     {
       year: "2008",
       title: "Natal de Luz",
-      image: "/assets/images/timeline-2008-natal-de-luz.png",
+      image: "./assets/images/timeline-2008-natal-de-luz.png",
       description:
         "Figuras geométricas representando a tradicional imagem do presépio. Reis magos chegando de bicicleta para adorar o menino Jesus. Cenários que incluem desenhos a laser. O Nataleluia, espetáculo de Natal da Primeira Igreja Batista de Curitiba, encena este ano a Natividade sob o tema “Natal de Luz”, contando para isso com o auxílio da tecnologia e de avançadas técnicas de som e iluminação. O foco, no entanto, não está em nenhuma dessas inovações, mas no coração da mensagem natalina: o nascimento de filho de Deus, que veio para trazer salvação a todos que nele depositarem sua fé.",
     },
     {
       year: "2007",
       title: "Natal do Coração",
-      image: "/assets/images/timeline-2007-natal-do-coracao.png",
+      image: "./assets/images/timeline-2007-natal-do-coracao.png",
       description:
         "Cerca de 500 profissionais e voluntários estão envolvidos no trabalho. Desde fevereiro músicos cristãos aceitaram o desafio de compor oito músicas com ritmos brasileiros, que vão do samba à MPB, especialmente para o Nataleluia. O espetáculo terá um cenário de sonho e, nele, um garoto em busca da felicidade. Aventura, dança, teatro, futebol e interatividade são alguns dos ingredientes que estão sendo preparados. “A ideia é falar de sonhos que precisam ser entregues a Deus”, diz o pastor Paulo Davi e Silva, do Ministério de Adoração da PIB.",
     },
-    { year: "2006", title: "Uma Noite de Milagre", image: "/assets/images/timeline-2006-uma-noite-de-milagre.png" },
+    { year: "2006", title: "Uma Noite de Milagre", image: "./assets/images/timeline-2006-uma-noite-de-milagre.png" },
     {
       year: "2005",
       title: "O Proósito do Natal",
-      image: "/assets/images/timeline-2005-o-proposito-do-natal.png",
+      image: "./assets/images/timeline-2005-o-proposito-do-natal.png",
       description:
         "Uma cruz feita de luzes marcou o ponto alto da apresentação. A história apresentou um escritor que buscava o sentido da vida nos livros e no conhecimento, mas que só encontrou paz no amor de Jesus.",
     },
     {
       year: "2004",
       title: "Jornada da Esperança",
-      image: "/assets/images/timeline-2004-jornada-da-esperanca.png",
+      image: "./assets/images/timeline-2004-jornada-da-esperanca.png",
       description:
         "Os espectadores viajaram pelo tempo na fantástica jornada da esperança. Na história, o nascimento de Jesus foi representado aqui no Brasil, em Belém do Pará. O espetáculo ainda teve a apresentação do Nataleluia...",
     },
     {
       year: "2003",
       title: "Revivendo a Essência do Natal",
-      image: "/assets/images/timeline-2003-revivendo-a-essencia-do-natal.png",
+      image: "./assets/images/timeline-2003-revivendo-a-essencia-do-natal.png",
       description: "Compilação de músicas que marcaram os Nataleluias anteriores.",
     },
     {
       year: "2002",
       title: "A Glória do Senhor",
-      image: "/assets/images/timeline-2002-a-gloria-do-senhor.png",
+      image: "./assets/images/timeline-2002-a-gloria-do-senhor.png",
       description:
         "De uma forma bem humorada, a encenação resgata personagens dos anos anteriores e utilizando-se da metalinguagem, participam da produção do espetáculo, levando o público a entender o verdadeiro sentido do Natal.",
     },
     {
       year: "2001",
       title: "Bem Vindo ao Nosso Mundo",
-      image: "/assets/images/timeline-2001-bem-vindo-ao-nosso-mundo.png",
+      image: "./assets/images/timeline-2001-bem-vindo-ao-nosso-mundo.png",
       description:
         "Em 2001, ano que entrou para a história por conta do atentado terrorista às Torres Gêmeas, o Nataleluia falou da vida de Jesus Cristo e fez um paralelo com os tristes acontecimentos.",
     },
     {
       year: "2000",
       title: "Natal Inesquecível",
-      image: "/assets/images/timeline-2000-natal-inesquecivel.png",
+      image: "./assets/images/timeline-2000-natal-inesquecivel.png",
       description:
         "Tia Flora e sobrinhas. Livro gigante no palco contavam a história. Pr. Paschoal explica o plano de salvação e o verdadeiro sentido do Natal.",
     },
     {
       year: "1999",
       title: "Natal é Deus por nós",
-      image: "/assets/images/timeline-1999-natal-e-deus-por-nos.png",
+      image: "./assets/images/timeline-1999-natal-e-deus-por-nos.png",
       description:
         "Neste ano, o evento contou com um belíssimo musical: orquestra de sinos, conjunto de pandeiros, 12 teclados, além de teatro, dança, coro Nataleluia e orquestra sinfônica.",
     },
     {
       year: "1998",
       title: "Natal em Sua Casa",
-      image: "/assets/images/timeline-1998-natal-em-sua-casa.png?v=2",
+      image: "./assets/images/timeline-1998-natal-em-sua-casa.png?v=2",
       description:
         "O público encantou-se com uma família formada por três gerações. A cativante e curiosa tia Flora, que não conhecia a verdadeira história do Natal, foi destaque na apresentação. Com ajuda de um pequeno garoto, do coral, da orquestra e do teatro, tia Flora compreendeu o significado da data.",
     },
     {
       year: "1997",
       title: "Maravilhas de um Natal de amor",
-      image: "/assets/images/timeline-1997-maravilhas-natal-amor.png",
+      image: "./assets/images/timeline-1997-maravilhas-natal-amor.png",
       description:
         "Exibido na Ópera de Arame e coordenado pelo Pr. Marcilio de Oliveira Filho, foi um musical que teve uma montagem cênica grande para os padrões da época.\n\nAquela celebração de 1997 deixou muita saudade; não porque foi uma linda noite de festa, mas porque, acima de tudo, vidas foram tocadas pela verdadeira mensagem do Natal. Uma história de dois pastores que viveram (cenicamente) nos tempos do nascimento de Jesus foi contada ao longo do espetáculo; a plateia estava testemunhando o nascimento de Jesus participando da cena histórica de maneira dinâmica e excitante. Ao final do espetáculo, na mais eletrizante passagem da cantata, o coro “Deixa Cristo brilhar” ressoou sob a noite estrelada; como se em uma só voz, as testemunhas do nascimento de Cristo efetivamente se uniram em um só desejo: levar a luz de Cristo a todos os povos.",
     },
@@ -958,7 +958,7 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
         <div className="flex flex-col justify-center lg:min-h-[448px] lg:-translate-y-[24%]">
           <div className="mb-[1.6rem] flex min-w-0 items-start gap-2 text-[#f0ecb9] sm:items-center sm:gap-4">
             <img
-              src="/assets/icons/nataleluia-monogram-n-bege.png"
+              src="./assets/icons/nataleluia-monogram-n-bege.png"
               alt=""
               aria-hidden="true"
               className="timeline-monogram-n h-8 w-auto shrink-0 object-contain sm:h-9"

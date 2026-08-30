@@ -36,7 +36,7 @@ Landing page do espetáculo **Nataleluia** (PIB Curitiba). Projeto React com pre
 
 1. Sirva a pasta do projeto com um servidor HTTP local (Live Server, `npx serve`, Vite, etc.).
 2. Abra `preview.html` ou `index.html` no navegador.
-3. Os assets locais são servidos de `public/assets/` (`/assets/images/...`, `/assets/icons/...`).
+3. Os assets locais são servidos de `public/assets/` (`./assets/images/...`, `./assets/icons/...`).
 
 ### Com Vite (opcional)
 
@@ -74,6 +74,6 @@ Antes de publicar:
 
 ## Observações
 
-- Caminhos de assets locais usam `/assets/images/` e `/assets/icons/`.
+- Caminhos de assets locais usam `./assets/images/` e `./assets/icons/`.
 - Imagens externas (hero, logos de parceiros, timeline recente) permanecem em URLs remotas.
 - Duas cópias do projeto podem existir no drive (`2026 WEB DESIGN` e `2026_WEB DESIGN`); manter sincronizadas via Git.
