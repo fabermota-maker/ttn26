@@ -4,7 +4,17 @@ const LOGO_URL = "./assets/logo-nataleluia.png";
 const HERO_VIDEO_URL = "./assets/hero.mp4";
 const CHURCH_LOGO_URL = "./assets/logo-pib.png";
 const TIMELINE_SELECTED_BG_URL = "https://live.staticflickr.com/65535/55005691814_c0d8c37fbc.jpg";
-const COMPROMISSO_ADORACAO_LOGO_URL = "./assets/images/compromisso-adoracao-logo.png?v=3";
+const COMPROMISSO_ADORACAO_LOGO_URL = "./assets/images/compromisso-adoracao-logo.png?v=5";
+const PIB_CURITIBA_LOGO_URL = "./assets/images/logo-pib-curitiba.png";
+const FLICKR_NATALELUIA_COLLECTION_URL = "https://www.flickr.com/photos/pibcuritiba/collections/72157622923258973/";
+
+function timelinePhotosUrl(year) {
+  const numericYear = Number(year);
+  if (numericYear >= 2004 && numericYear !== 2006) {
+    return `https://www.flickr.com/search/?text=nataleluia+${year}`;
+  }
+  return FLICKR_NATALELUIA_COLLECTION_URL;
+}
 const SPONSOR_MONOGRAM_URL = "./assets/icons/nataleluia-monogram-n.png";
 
 const TIMELINE_2022_CARD_IMAGE_URL = `data:image/svg+xml,${encodeURIComponent(`
@@ -367,10 +377,20 @@ function Header({ blur, bgOpacity, open, setOpen, currentPage, setCurrentPage })
   const desktopNavClass =
     "inline-flex h-7 shrink-0 items-center justify-center whitespace-nowrap rounded-full px-1.5 text-[10px] font-medium leading-none text-white/82 transition hover:bg-white/10 hover:text-white lg:px-2 lg:text-[10.5px]";
   const mobileNavClass =
-    "w-full rounded-full px-4 py-3 text-center text-xs text-white/78 transition hover:bg-white/10 hover:text-white";
+    "w-full rounded-full px-4 py-2.5 text-center text-[15px] font-medium text-white/90 transition hover:bg-white/10 hover:text-white";
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
+
   return (
     <header className="fixed left-0 right-0 top-[50px] z-50 px-4" style={{ pointerEvents: "none" }}>
-      <div className="header-bar-wrap relative mx-auto w-full max-w-[62rem]">
+      <div className="header-bar-wrap relative z-50 mx-auto w-full max-w-[62rem]">
         <div
           className="header-pill w-full rounded-full border border-white/20 shadow-[0_18px_60px_rgba(0,0,0,.25)]"
           style={{
@@ -453,25 +473,50 @@ function Header({ blur, bgOpacity, open, setOpen, currentPage, setCurrentPage })
 
       {open && (
         <div
-          className="mx-auto mt-3 w-full max-w-sm rounded-[1.75rem] border border-white/10 bg-[#411010]/90 p-4 shadow-[0_20px_60px_rgba(0,0,0,.34)] backdrop-blur-2xl lg:hidden"
+          className="fixed inset-0 z-40 flex flex-col items-center justify-between bg-[#411010] px-5 pb-8 pt-[7.25rem] lg:hidden"
           style={{ pointerEvents: "auto" }}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu"
         >
-          <div className="flex flex-col gap-2">
-            {navItems.map((item) =>
-              renderNavItem(item, {
-                setOpen,
-                setCurrentPage,
-                currentPage,
-                className: mobileNavClass,
-              })
-            )}
+          <div className="flex w-full max-w-[22rem] flex-1 flex-col items-center justify-center">
+            <nav
+              className="flex w-full flex-col items-center rounded-[1.85rem] bg-[#2c1010]/92 px-5 py-7 shadow-[0_24px_70px_rgba(0,0,0,.4)]"
+              aria-label="Menu mobile"
+            >
+              {navItems.map((item) =>
+                renderNavItem(item, {
+                  setOpen,
+                  setCurrentPage,
+                  currentPage,
+                  className: mobileNavClass,
+                })
+              )}
+              <button
+                type="button"
+                onClick={() => handlePageNav("checkout", { setOpen, setCurrentPage })}
+                className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-[#d54b39] px-5 text-[15px] font-bold uppercase tracking-[0.04em] text-[#071426] shadow-[0_8px_24px_rgba(213,75,57,.35)]"
+              >
+                MEU INGRESSO
+              </button>
+            </nav>
             <button
               type="button"
-              onClick={() => handlePageNav("checkout", { setOpen, setCurrentPage })}
-              className="mt-2 rounded-full bg-[#d54b39] px-5 py-3 text-center text-xs font-semibold uppercase tracking-[0.08em] text-[#071426]"
+              className="mt-7 text-white/90"
+              onClick={() => setOpen(false)}
+              aria-label="Fechar menu"
             >
-              Meu ingresso
+              <Icon name="down" size={40} />
             </button>
+          </div>
+          <div className="mt-4 w-full max-w-[22rem] border-t border-white/15 pt-6">
+            <img
+              src={PIB_CURITIBA_LOGO_URL}
+              alt="Primeira Igreja Batista de Curitiba"
+              className="mx-auto h-auto w-[min(220px,70vw)] object-contain opacity-95"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
       )}
@@ -666,14 +711,15 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
       title: "25 anos",
       image: TIMELINE_2022_CARD_IMAGE_URL,
       bgImage: "https://nataleluia.com.br/wp-content/uploads/2024/09/52615653741_7fb121d085_o.jpg",
+      albumUrl: "https://www.flickr.com/search/?text=nataleluia+2022",
     },
-    { year: "2021", title: "Um lugar para Nascer", image: "./assets/images/timeline-2021-um-lugar-para-nascer.png" },
-    { year: "2020", title: "Um Olhar para o Céu", image: "./assets/images/timeline-2020-um-olhar-para-o-ceu.png" },
+    { year: "2021", title: "Um lugar para Nascer", image: "./assets/images/timeline-2021-um-lugar-para-nascer.png", albumUrl: "https://www.flickr.com/search/?text=nataleluia+2021" },
+    { year: "2020", title: "Um Olhar para o Céu", image: "./assets/images/timeline-2020-um-olhar-para-o-ceu.png", albumUrl: "https://www.flickr.com/search/?text=nataleluia+2020" },
     {
       year: "2019",
       title: "O Esplendor do Natal",
       image: "./assets/images/timeline-2019-o-esplendor-do-natal.png",
-      albumUrl: "https://www.flickr.com/photos/pibcuritiba/albums/72157712376913522/",
+      albumUrl: "https://www.flickr.com/search/?text=nataleluia+2019",
       description:
         "Com uma atmosfera de um programa de rádio apresentado na noite de Natal, belas canções natalinas e uma grande variedade de gêneros musicais, o radialista, por meio de sua locução, vai ensinando o verdadeiro significado da data, convidando os participantes a louvarem a Jesus, para comemorar o Esplendor do Natal.",
     },
@@ -681,7 +727,7 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
       year: "2018",
       title: "De Belén para a Cruz",
       image: "./assets/images/timeline-2018-de-belen-para-a-cruz.png",
-      albumUrl: "https://www.flickr.com/photos/pibcuritiba/albums/72157705235964215/page4",
+      albumUrl: "https://www.flickr.com/search/?text=nataleluia+2018",
       description:
         "Apresenta a mensagem de Natal com performances ao vivo e participação de mais de 700 voluntários. O evento reúne orquestra, teatro, dança, um grande coral e efeitos especiais. Ingressos pelo site nataleluia.com.br a partir do dia 01 de setembro de 2018.",
     },
@@ -689,12 +735,13 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
       year: "2017",
       title: "20 anos de história",
       image: "./assets/images/timeline-2017-20-anos-de-historia.png",
-      albumUrl: "https://www.flickr.com/photos/pibcuritiba/albums/72157690172193431/with/25565657128/",
+      albumUrl: "https://www.flickr.com/search/?text=nataleluia+2017",
     },
     {
       year: "2016",
       title: "O Encontro",
       image: "./assets/images/timeline-2016-o-encontro.png",
+      albumUrl: "https://www.flickr.com/search/?text=nataleluia+2016",
       description:
         "Cerca de 500 voluntários: músicos, atores, cantores, roteiristas, cenógrafos, bailarinos, publicitários e muitos outros profissionais se unem para celebrar em Curitiba, o verdadeiro sentido do natal.\n\nUm público de mais de 45 mil pessoas já assistiram o evento e se emocionaram com as apresentações que já acontecem há mais de 15 anos e reúne: vídeo, teatro, dança, tecnologia, coral e orquestra em um musical que encanta a todas as idades.\n\nO Nataleluia já faz parte da agenda cultural de Curitiba, muito mais do que uma cantata de natal, o evento tem como objetivo também arrecadar alimentos para a confecção e distribuição de cestas básicas para a população carente.",
     },
@@ -812,7 +859,10 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
       description:
         "Exibido na Ópera de Arame e coordenado pelo Pr. Marcilio de Oliveira Filho, foi um musical que teve uma montagem cênica grande para os padrões da época.\n\nAquela celebração de 1997 deixou muita saudade; não porque foi uma linda noite de festa, mas porque, acima de tudo, vidas foram tocadas pela verdadeira mensagem do Natal. Uma história de dois pastores que viveram (cenicamente) nos tempos do nascimento de Jesus foi contada ao longo do espetáculo; a plateia estava testemunhando o nascimento de Jesus participando da cena histórica de maneira dinâmica e excitante. Ao final do espetáculo, na mais eletrizante passagem da cantata, o coro “Deixa Cristo brilhar” ressoou sob a noite estrelada; como se em uma só voz, as testemunhas do nascimento de Cristo efetivamente se uniram em um só desejo: levar a luz de Cristo a todos os povos.",
     },
-  ];
+  ].map((item) => ({
+    ...item,
+    albumUrl: timelinePhotosUrl(item.year),
+  }));
 
   const [activeTimeline, setActiveTimeline] = useState(0);
   const [leavingTimeline, setLeavingTimeline] = useState(null);
@@ -821,6 +871,10 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
   const [isMobileTimeline, setIsMobileTimeline] = useState(false);
   const timelineTouchRef = useRef({ startX: 0, startY: 0, deltaX: 0, tracking: false });
   const carouselRef = useRef(null);
+  const timelineSectionRef = useRef(null);
+  const activeTimelineRef = useRef(0);
+  const timelineWheelLockRef = useRef(false);
+  const handleTimelineSelectRef = useRef(() => {});
   const [timelineTilt, setTimelineTilt] = useState({
     rotateX: 0,
     rotateY: 0,
@@ -882,6 +936,37 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
     window.setTimeout(() => setLeavingTimeline(null), 820);
   };
 
+  handleTimelineSelectRef.current = handleTimelineSelect;
+
+  useEffect(() => {
+    activeTimelineRef.current = activeTimeline;
+  }, [activeTimeline]);
+
+  useEffect(() => {
+    const node = timelineSectionRef.current;
+    if (!node) return undefined;
+
+    const onWheel = (event) => {
+      event.preventDefault();
+      if (timelineWheelLockRef.current) return;
+      if (Math.abs(event.deltaY) < 8) return;
+
+      timelineWheelLockRef.current = true;
+      const current = activeTimelineRef.current;
+      if (event.deltaY < 0) {
+        handleTimelineSelectRef.current(current - 1);
+      } else {
+        handleTimelineSelectRef.current(current + 1);
+      }
+      window.setTimeout(() => {
+        timelineWheelLockRef.current = false;
+      }, 520);
+    };
+
+    node.addEventListener("wheel", onWheel, { passive: false });
+    return () => node.removeEventListener("wheel", onWheel);
+  }, []);
+
   const goToNextEvent = () => handleTimelineSelect(activeTimeline - 1);
   const goToPreviousEvent = () => handleTimelineSelect(activeTimeline + 1);
 
@@ -937,7 +1022,13 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
   };
 
   return (
-    <section id="timeline-lp" className="lp-section lp-section-timeline relative min-h-[calc(100vh-var(--header-offset))] overflow-x-clip overflow-y-hidden bg-transparent px-3 sm:px-[1.6rem]">
+    <section
+      id="timeline-lp"
+      ref={timelineSectionRef}
+      className="lp-section lp-section-timeline relative min-h-[calc(100vh-var(--header-offset))] overflow-x-clip overflow-y-hidden bg-transparent px-3 sm:px-[1.6rem]"
+      onContextMenu={(event) => event.preventDefault()}
+      onDragStart={(event) => event.preventDefault()}
+    >
       <div className="pointer-events-none absolute inset-y-0 left-1/2 z-0 w-screen max-w-none -translate-x-1/2">
         <img
           key={`${activeItem.year}-${activeItem.title}-${activeItem.bgImage || activeItem.image}`}
@@ -1067,7 +1158,7 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
 
         <div className="timeline-actions mt-auto flex shrink-0 flex-wrap items-stretch gap-2 pt-[1.6rem] sm:items-center">
           <a
-            href={activeItem.albumUrl || "#timeline-lp"}
+            href={timelinePhotosUrl(activeItem.year)}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex w-fit items-center rounded-full border border-[#d54b39]/45 bg-[#d54b39]/18 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-white transition hover:bg-[#d54b39]"
@@ -1517,19 +1608,30 @@ function CheckoutPage() {
 function N2026Footer() {
   return (
     <footer id="n2026-contato" className="n2026-footer lp-section lp-section-footer relative bg-transparent px-4 sm:px-8">
-      <div className="mx-auto max-w-6xl border-t border-white/10 pt-10">
+      <div className="mx-auto max-w-6xl pt-10">
         <div className="flex flex-col items-center gap-8 text-center">
-          <div className="compromisso-adoracao-logo-wrap">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+            <div className="compromisso-adoracao-logo-wrap">
+              <img
+                src={COMPROMISSO_ADORACAO_LOGO_URL}
+                alt="Compromisso Adoração"
+                className="compromisso-adoracao-logo h-auto w-[min(120px,36vw)] object-contain opacity-95"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
             <img
-              src={COMPROMISSO_ADORACAO_LOGO_URL}
-              alt="Compromisso Adoração"
-              className="compromisso-adoracao-logo h-auto w-[min(240px,72vw)] object-contain opacity-95"
+              src={PIB_CURITIBA_LOGO_URL}
+              alt="Primeira Igreja Batista de Curitiba"
+              className="h-auto w-[min(120px,36vw)] object-contain opacity-95"
               loading="lazy"
               decoding="async"
             />
           </div>
+        </div>
 
-          <div className="flex w-full max-w-xl flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <div className="mt-10 flex min-w-0 flex-col items-center justify-center gap-5 pt-7 text-center">
+          <div className="flex w-full max-w-xl flex-col items-center justify-center gap-3 sm:flex-row">
             <a
               href={COMPROMISSO_ADORACAO_MAPS_URL}
               target="_blank"
@@ -1552,13 +1654,12 @@ function N2026Footer() {
               Instagram
             </a>
           </div>
-        </div>
-
-        <div className="mt-10 flex min-w-0 flex-col justify-between gap-4 border-t border-white/10 pt-7 text-[clamp(0.65rem,2.4vw,0.75rem)] uppercase tracking-[0.16em] text-white/38 sm:flex-row sm:tracking-[0.22em]">
-          <span className="min-w-0 break-words">
-            Compromisso Adoração | <N2026BrandMark />
-          </span>
-          <span className="min-w-0 break-words">Primeira Igreja Batista de Curitiba</span>
+          <div className="flex min-w-0 flex-col items-center justify-center gap-2 text-[clamp(0.65rem,2.4vw,0.75rem)] uppercase tracking-[0.16em] text-white/38 sm:flex-row sm:gap-6 sm:tracking-[0.22em]">
+            <span className="min-w-0 break-words">
+              Compromisso Adoração | <N2026BrandMark />
+            </span>
+            <span className="min-w-0 break-words">Primeira Igreja Batista de Curitiba</span>
+          </div>
         </div>
       </div>
     </footer>
@@ -2302,6 +2403,16 @@ export default function NataleluiaLandingPage() {
         }
         #timeline-lp {
           overflow-x: clip;
+          -webkit-user-select: none;
+          user-select: none;
+          -webkit-touch-callout: none;
+        }
+        #timeline-lp img,
+        #timeline-lp a,
+        #timeline-lp button {
+          -webkit-user-select: none;
+          user-select: none;
+          -webkit-user-drag: none;
         }
         @media (max-width: 1100px) and (min-width: 768px) {
           #timeline-lp .timeline-carousel-stage {

@@ -1,4 +1,5 @@
 function showLandingPageError(error) {
+  hideLpBootScreen();
   const root = document.getElementById("root");
   root.innerHTML = `
     <div class="lp-error">
@@ -54,6 +55,7 @@ async function startLandingPage() {
       compiled;
 
     new Function(executable)();
+    revealLandingWhenReady();
   } catch (error) {
     showLandingPageError(error);
   }

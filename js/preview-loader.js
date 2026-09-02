@@ -1,4 +1,5 @@
 function showPreviewError(error) {
+  hideLpBootScreen();
   const root = document.getElementById("root");
   root.innerHTML = `
     <div class="preview-error">
@@ -45,6 +46,7 @@ async function startPreview() {
       compiled;
 
     new Function(executable)();
+    revealLandingWhenReady();
   } catch (error) {
     showPreviewError(error);
   }

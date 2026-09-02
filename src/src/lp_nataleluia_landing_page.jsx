@@ -4,8 +4,17 @@ const LOGO_URL = "https://nataleluia.com.br/wp-content/uploads/2024/09/natalelui
 const HERO_VIDEO_URL = "https://nataleluia.com.br/wp-content/uploads/2024/09/WhatsApp-Video-2024-09-02-at-15.38.48.mp4";
 const CHURCH_LOGO_URL = "https://pibcuritiba.org.br/wp-content/uploads/2016/07/logo_peq.png";
 const TIMELINE_SELECTED_BG_URL = "https://live.staticflickr.com/65535/55005691814_c0d8c37fbc.jpg";
-const COMPROMISSO_ADORACAO_LOGO_URL = "./assets/images/compromisso-adoracao-logo.png?v=3";
+const COMPROMISSO_ADORACAO_LOGO_URL = "./assets/images/compromisso-adoracao-logo.png?v=5";
 const SPONSOR_MONOGRAM_URL = "./assets/icons/nataleluia-monogram-n.png";
+const FLICKR_NATALELUIA_COLLECTION_URL = "https://www.flickr.com/photos/pibcuritiba/collections/72157622923258973/";
+
+function timelinePhotosUrl(year) {
+  const numericYear = Number(year);
+  if (numericYear >= 2004 && numericYear !== 2006) {
+    return `https://www.flickr.com/search/?text=nataleluia+${year}`;
+  }
+  return FLICKR_NATALELUIA_COLLECTION_URL;
+}
 
 const TIMELINE_2022_CARD_IMAGE_URL = `data:image/svg+xml,${encodeURIComponent(`
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="25 anos">
@@ -812,7 +821,10 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
       description:
         "Exibido na Ópera de Arame e coordenado pelo Pr. Marcilio de Oliveira Filho, foi um musical que teve uma montagem cênica grande para os padrões da época.\n\nAquela celebração de 1997 deixou muita saudade; não porque foi uma linda noite de festa, mas porque, acima de tudo, vidas foram tocadas pela verdadeira mensagem do Natal. Uma história de dois pastores que viveram (cenicamente) nos tempos do nascimento de Jesus foi contada ao longo do espetáculo; a plateia estava testemunhando o nascimento de Jesus participando da cena histórica de maneira dinâmica e excitante. Ao final do espetáculo, na mais eletrizante passagem da cantata, o coro “Deixa Cristo brilhar” ressoou sob a noite estrelada; como se em uma só voz, as testemunhas do nascimento de Cristo efetivamente se uniram em um só desejo: levar a luz de Cristo a todos os povos.",
     },
-  ];
+  ].map((item) => ({
+    ...item,
+    albumUrl: timelinePhotosUrl(item.year),
+  }));
 
   const [activeTimeline, setActiveTimeline] = useState(0);
   const [leavingTimeline, setLeavingTimeline] = useState(null);
@@ -821,6 +833,10 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
   const [isMobileTimeline, setIsMobileTimeline] = useState(false);
   const timelineTouchRef = useRef({ startX: 0, startY: 0, deltaX: 0, tracking: false });
   const carouselRef = useRef(null);
+  const timelineSectionRef = useRef(null);
+  const activeTimelineRef = useRef(0);
+  const timelineWheelLockRef = useRef(false);
+  const handleTimelineSelectRef = useRef(() => {});
   const [timelineTilt, setTimelineTilt] = useState({
     rotateX: 0,
     rotateY: 0,
@@ -882,6 +898,37 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
     window.setTimeout(() => setLeavingTimeline(null), 820);
   };
 
+  handleTimelineSelectRef.current = handleTimelineSelect;
+
+  useEffect(() => {
+    activeTimelineRef.current = activeTimeline;
+  }, [activeTimeline]);
+
+  useEffect(() => {
+    const node = timelineSectionRef.current;
+    if (!node) return undefined;
+
+    const onWheel = (event) => {
+      event.preventDefault();
+      if (timelineWheelLockRef.current) return;
+      if (Math.abs(event.deltaY) < 8) return;
+
+      timelineWheelLockRef.current = true;
+      const current = activeTimelineRef.current;
+      if (event.deltaY < 0) {
+        handleTimelineSelectRef.current(current - 1);
+      } else {
+        handleTimelineSelectRef.current(current + 1);
+      }
+      window.setTimeout(() => {
+        timelineWheelLockRef.current = false;
+      }, 520);
+    };
+
+    node.addEventListener("wheel", onWheel, { passive: false });
+    return () => node.removeEventListener("wheel", onWheel);
+  }, []);
+
   const goToNextEvent = () => handleTimelineSelect(activeTimeline - 1);
   const goToPreviousEvent = () => handleTimelineSelect(activeTimeline + 1);
 
@@ -937,7 +984,13 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
   };
 
   return (
-    <section id="timeline-lp" className="lp-section lp-section-timeline relative min-h-[calc(100vh-var(--header-offset))] overflow-x-clip overflow-y-hidden bg-transparent px-3 sm:px-[1.6rem]">
+    <section
+      id="timeline-lp"
+      ref={timelineSectionRef}
+      className="lp-section lp-section-timeline relative min-h-[calc(100vh-var(--header-offset))] overflow-x-clip overflow-y-hidden bg-transparent px-3 sm:px-[1.6rem]"
+      onContextMenu={(event) => event.preventDefault()}
+      onDragStart={(event) => event.preventDefault()}
+    >
       <div className="pointer-events-none absolute inset-y-0 left-1/2 z-0 w-screen max-w-none -translate-x-1/2">
         <img
           key={`${activeItem.year}-${activeItem.title}-${activeItem.bgImage || activeItem.image}`}
@@ -1067,7 +1120,7 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
 
         <div className="timeline-actions mt-auto flex shrink-0 flex-wrap items-stretch gap-2 pt-[1.6rem] sm:items-center">
           <a
-            href={activeItem.albumUrl || "#timeline-lp"}
+            href={timelinePhotosUrl(activeItem.year)}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex w-fit items-center rounded-full border border-[#d54b39]/45 bg-[#d54b39]/18 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-white transition hover:bg-[#d54b39]"
@@ -1517,19 +1570,21 @@ function CheckoutPage() {
 function N2026Footer() {
   return (
     <footer id="n2026-contato" className="n2026-footer lp-section lp-section-footer relative bg-transparent px-4 sm:px-8">
-      <div className="mx-auto max-w-6xl border-t border-white/10 pt-10">
+      <div className="mx-auto max-w-6xl pt-10">
         <div className="flex flex-col items-center gap-8 text-center">
           <div className="compromisso-adoracao-logo-wrap">
             <img
               src={COMPROMISSO_ADORACAO_LOGO_URL}
               alt="Compromisso Adoração"
-              className="compromisso-adoracao-logo h-auto w-[min(240px,72vw)] object-contain opacity-95"
+              className="compromisso-adoracao-logo h-auto w-[min(120px,36vw)] object-contain opacity-95"
               loading="lazy"
               decoding="async"
             />
           </div>
+        </div>
 
-          <div className="flex w-full max-w-xl flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <div className="mt-10 flex min-w-0 flex-col items-center justify-center gap-5 pt-7 text-center">
+          <div className="flex w-full max-w-xl flex-col items-center justify-center gap-3 sm:flex-row">
             <a
               href={COMPROMISSO_ADORACAO_MAPS_URL}
               target="_blank"
@@ -1552,13 +1607,12 @@ function N2026Footer() {
               Instagram
             </a>
           </div>
-        </div>
-
-        <div className="mt-10 flex min-w-0 flex-col justify-between gap-4 border-t border-white/10 pt-7 text-[clamp(0.65rem,2.4vw,0.75rem)] uppercase tracking-[0.16em] text-white/38 sm:flex-row sm:tracking-[0.22em]">
-          <span className="min-w-0 break-words">
-            Compromisso Adoração | <N2026BrandMark />
-          </span>
-          <span className="min-w-0 break-words">Primeira Igreja Batista de Curitiba</span>
+          <div className="flex min-w-0 flex-col items-center justify-center gap-2 text-[clamp(0.65rem,2.4vw,0.75rem)] uppercase tracking-[0.16em] text-white/38 sm:flex-row sm:gap-6 sm:tracking-[0.22em]">
+            <span className="min-w-0 break-words">
+              Compromisso Adoração | <N2026BrandMark />
+            </span>
+            <span className="min-w-0 break-words">Primeira Igreja Batista de Curitiba</span>
+          </div>
         </div>
       </div>
     </footer>
@@ -2302,6 +2356,16 @@ export default function NataleluiaLandingPage() {
         }
         #timeline-lp {
           overflow-x: clip;
+          -webkit-user-select: none;
+          user-select: none;
+          -webkit-touch-callout: none;
+        }
+        #timeline-lp img,
+        #timeline-lp a,
+        #timeline-lp button {
+          -webkit-user-select: none;
+          user-select: none;
+          -webkit-user-drag: none;
         }
         @media (max-width: 1100px) and (min-width: 768px) {
           #timeline-lp .timeline-carousel-stage {
