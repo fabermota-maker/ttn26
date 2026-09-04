@@ -4,7 +4,7 @@ const LOGO_URL = "./assets/logo-nataleluia.png";
 const HERO_VIDEO_URL = "./assets/hero.mp4";
 const CHURCH_LOGO_URL = "./assets/logo-pib.png";
 const TIMELINE_SELECTED_BG_URL = "https://live.staticflickr.com/65535/55005691814_c0d8c37fbc.jpg";
-const COMPROMISSO_ADORACAO_LOGO_URL = "./assets/images/compromisso-adoracao-logo.png?v=5";
+const COMPROMISSO_ADORACAO_LOGO_URL = "./assets/images/compromisso-adoracao-logo.png?v=6";
 const PIB_CURITIBA_LOGO_URL = "./assets/images/logo-pib-curitiba.png";
 const FLICKR_NATALELUIA_COLLECTION_URL = "https://www.flickr.com/photos/pibcuritiba/collections/72157622923258973/";
 
@@ -666,7 +666,7 @@ function ExperienceSection() {
             <img
               src={COMPROMISSO_ADORACAO_LOGO_URL}
               alt="Compromisso Adoração"
-              className="h-auto w-[165px] object-contain opacity-95"
+              className="compromisso-adoracao-logo h-auto w-[165px] object-contain opacity-95"
               loading="lazy"
               decoding="async"
             />
@@ -1619,7 +1619,7 @@ function CheckoutPage() {
               <img
                 src={COMPROMISSO_ADORACAO_LOGO_URL}
                 alt="Compromisso Adoração"
-                className="h-auto w-[165px] object-contain opacity-95"
+                className="compromisso-adoracao-logo h-auto w-[165px] object-contain opacity-95"
                 loading="eager"
                 decoding="async"
               />
@@ -2151,6 +2151,7 @@ export default function NataleluiaLandingPage() {
         .compromisso-adoracao-logo {
           display: block;
           background: transparent !important;
+          mix-blend-mode: screen;
         }
         .compromisso-adoracao-logo-wrap {
           display: inline-flex;
