@@ -191,6 +191,8 @@ const CARD_IMAGE_SHAPE =
 
 const PROGRAM_CARD_PATH =
   "M14 0H178C185.7 0 192 6.3 192 14V90C175.4 90 162 103.4 162 120C162 136.6 175.4 150 192 150V258C192 265.7 185.7 272 178 272H14C6.3 272 0 265.7 0 258V150C16.6 150 30 136.6 30 120C30 103.4 16.6 90 0 90V14C0 6.3 6.3 0 14 0Z";
+const PROGRAM_CARD_CLIP_PATH =
+  "M 0.07292 0 H 0.92708 C 0.96719 0 1 0.02316 1 0.05147 V 0.33088 C 0.91354 0.33088 0.84375 0.38015 0.84375 0.44118 C 0.84375 0.50221 0.91354 0.55147 1 0.55147 V 0.94853 C 1 0.97684 0.96719 1 0.92708 1 H 0.07292 C 0.03281 1 0 0.97684 0 0.94853 V 0.55147 C 0.08646 0.55147 0.15625 0.50221 0.15625 0.44118 C 0.15625 0.38015 0.08646 0.33088 0 0.33088 V 0.05147 C 0 0.02316 0.03281 0 0.07292 0 Z";
 
 const CHECKOUT_TICKET_PATH =
   "M12 0H180C186.6 0 192 5.4 192 12V24C186 26 182 30 182 36C182 42 186 46 192 48V224C186 226 182 230 182 236C182 242 186 246 192 248V260C192 266.6 186.6 272 180 272H12C5.4 272 0 266.6 0 260V248C6 246 10 242 10 236C10 230 6 226 0 224V48C6 46 10 42 10 36C10 30 6 26 0 24V12C0 5.4 5.4 0 12 0Z";
@@ -588,36 +590,36 @@ function EventSection() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-3">
+          <svg width="0" height="0" className="absolute" aria-hidden="true">
+            <defs>
+              <clipPath id="program-card-clip" clipPathUnits="objectBoundingBox">
+                <path d={PROGRAM_CARD_CLIP_PATH} />
+              </clipPath>
+            </defs>
+          </svg>
           {cards.map((card, index) => (
             <article key={card.title} className="program-card group mx-auto w-full max-w-[192px]">
-              <div className="relative mx-auto aspect-[192/272] w-full max-w-[192px] overflow-visible">
+              <div className="relative mx-auto aspect-[192/272] w-full max-w-[192px]">
+                <div className="program-card-photo absolute inset-0">
+                  <img
+                    src={card.image}
+                    alt=""
+                    className="program-card-image absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
                 <svg
                   viewBox="0 0 192 272"
                   preserveAspectRatio="xMidYMid meet"
-                  className="absolute inset-0 h-full w-full overflow-visible"
+                  className="pointer-events-none absolute inset-0 h-full w-full"
                   aria-hidden="true"
                 >
                   <defs>
-                    <clipPath id={`program-card-mask-${index}`} clipPathUnits="userSpaceOnUse">
-                      <path d={PROGRAM_CARD_PATH} />
-                    </clipPath>
                     <linearGradient id={`program-card-border-${index}`} x1="0" x2="1" y1="0" y2="1">
                       <stop offset="0" stopColor="rgba(255,241,198,0.98)" />
                       <stop offset="0.48" stopColor="rgba(188,72,55,0.86)" />
                       <stop offset="1" stopColor="rgba(255,241,198,0.84)" />
                     </linearGradient>
                   </defs>
-
-                  <image
-                    href={card.image}
-                    x="0"
-                    y="0"
-                    width="192"
-                    height="272"
-                    preserveAspectRatio="xMidYMid slice"
-                    clipPath={`url(#program-card-mask-${index})`}
-                    className="program-card-image"
-                  />
                   <path
                     d={PROGRAM_CARD_PATH}
                     fill="none"
@@ -873,6 +875,7 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
   const carouselRef = useRef(null);
   const timelineSectionRef = useRef(null);
   const activeTimelineRef = useRef(0);
+  const timelineCountRef = useRef(timelineCards.length);
   const timelineWheelLockRef = useRef(false);
   const handleTimelineSelectRef = useRef(() => {});
   const [timelineTilt, setTimelineTilt] = useState({
@@ -937,27 +940,31 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
   };
 
   handleTimelineSelectRef.current = handleTimelineSelect;
+  timelineCountRef.current = timelineCards.length;
 
   useEffect(() => {
     activeTimelineRef.current = activeTimeline;
   }, [activeTimeline]);
 
   useEffect(() => {
-    const node = timelineSectionRef.current;
+    const node = carouselRef.current;
     if (!node) return undefined;
 
     const onWheel = (event) => {
+      const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      if (Math.abs(delta) < 8) return;
+
+      const current = activeTimelineRef.current;
+      const goingToOlder = delta > 0;
+      const atStart = current <= 0 && !goingToOlder;
+      const atEnd = current >= timelineCountRef.current - 1 && goingToOlder;
+      if (atStart || atEnd) return;
+
       event.preventDefault();
       if (timelineWheelLockRef.current) return;
-      if (Math.abs(event.deltaY) < 8) return;
 
       timelineWheelLockRef.current = true;
-      const current = activeTimelineRef.current;
-      if (event.deltaY < 0) {
-        handleTimelineSelectRef.current(current - 1);
-      } else {
-        handleTimelineSelectRef.current(current + 1);
-      }
+      handleTimelineSelectRef.current(goingToOlder ? current + 1 : current - 1);
       window.setTimeout(() => {
         timelineWheelLockRef.current = false;
       }, 520);
@@ -1192,22 +1199,27 @@ function FaqSection() {
     {
       question: "Que horas as portas abrem?",
       answer: "As portas abrem para o público às 19h. O ingresso permite a entrada no local até as 20h15.",
+      icon: "bi-clock",
     },
     {
       question: "Tem estacionamento na igreja?",
       answer: "Não. Procure estacionamentos conveniados nas proximidades da PIB Curitiba para estacionar.",
+      icon: "bi-car-front",
     },
     {
       question: "Terá Ministério Infantil?",
       answer: "Não haverá atividades no Ministério Infantil, mas o berçário estará disponível apenas para amamentação e troca de fraldas, sem voluntário plantonista.",
+      iconSrc: "./assets/icons/faq-ministerio-infantil.png",
     },
     {
       question: "Crianças pagam?",
       answer: "Crianças que ocupam um assento precisam de um ingresso. Crianças de colo não pagam ingresso.",
+      icon: "bi-ticket-perforated",
     },
     {
       question: "Outras dúvidas?",
       answer: "Em caso de dúvidas, você pode entrar em contato através do e-mail nataleluia@pibcuritiba.org.br.",
+      icon: "bi-envelope",
     },
   ];
 
@@ -1219,31 +1231,45 @@ function FaqSection() {
           <span className="font-bold">Dúvidas</span> frequentes
         </h2>
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {questions.map((item, index) => (
+          {questions.map((item) => (
             <article
               key={item.question}
-              className="flex min-h-[210px] min-w-0 flex-col justify-between rounded-[1.25rem] border border-white/10 bg-white/[0.04] p-5 text-white/78 backdrop-blur-md transition hover:border-[#d54b39]/35 hover:bg-white/[0.06]"
+              className="flex min-w-0 items-center gap-4 rounded-[1.25rem] border border-white/10 bg-white/[0.04] p-5 text-white/78 backdrop-blur-md transition hover:border-[#d54b39]/35 hover:bg-white/[0.06]"
             >
-              <div className="mb-3 flex items-start gap-3">
-                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#d54b39]/18 text-[11px] font-semibold text-[#f0ecb9]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
+              <div className="grid h-11 w-11 shrink-0 place-items-center text-[1.75rem] leading-none text-white" aria-hidden="true">
+                {item.iconSrc ? (
+                  <img
+                    src={item.iconSrc}
+                    alt=""
+                    className="h-8 w-8 object-contain"
+                    style={{ filter: "brightness(0) invert(1)" }}
+                  />
+                ) : (
+                  <i className={`bi ${item.icon}`} />
+                )}
+              </div>
+              <div className="min-w-0">
                 <h3 className="text-[15px] font-medium leading-snug tracking-[-0.02em] text-white">
                   {item.question}
                 </h3>
+                <p className="mt-2 text-[12px] leading-5 text-white/62">
+                  {item.answer}
+                </p>
               </div>
-              <p className="pl-10 text-[12px] leading-5 text-white/62">
-                {item.answer}
-              </p>
             </article>
           ))}
-          <article className="flex min-h-[210px] flex-col rounded-[20px] border border-white/10 bg-[#2e5e4a] p-5 text-white opacity-100 shadow-[0_14px_36px_rgba(0,0,0,.2)]">
-            <h3 className="text-[14px] font-bold uppercase tracking-[0.03em]">
-              ATENÇÃO!
-            </h3>
-            <p className="mt-3 text-[12px] font-light leading-5 text-white/92">
-              O espetáculo contém sequências com flashes de luz que podem afetar espectadores suscetíveis a epilepsia e outros distúrbios causados pela sensibilidade à luz.
-            </p>
+          <article className="flex items-center gap-4 rounded-[20px] border border-white/10 bg-[#2e5e4a] p-5 text-white opacity-100 shadow-[0_14px_36px_rgba(0,0,0,.2)]">
+            <div className="grid h-11 w-11 shrink-0 place-items-center text-[1.75rem] leading-none text-white" aria-hidden="true">
+              <i className="bi bi-exclamation-triangle" />
+            </div>
+            <div className="min-w-0">
+              <h3 className="text-[14px] font-bold uppercase tracking-[0.03em]">
+                ATENÇÃO!
+              </h3>
+              <p className="mt-2 text-[12px] font-light leading-5 text-white/92">
+                O espetáculo contém sequências com flashes de luz que podem afetar espectadores suscetíveis a epilepsia e outros distúrbios causados pela sensibilidade à luz.
+              </p>
+            </div>
           </article>
         </div>
       </div>
@@ -1828,10 +1854,22 @@ function Footer() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <a className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70" href="#" aria-label="Instagram do Nataleluia">
+              <a
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70"
+                href={COMPROMISSO_ADORACAO_INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram do Compromisso Adoração"
+              >
                 <Icon name="instagram" size={17} /> Instagram
               </a>
-              <a className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70" href="#" aria-label="Localização do Nataleluia em Curitiba">
+              <a
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70"
+                href={COMPROMISSO_ADORACAO_MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Localização do Nataleluia em Curitiba"
+              >
                 <Icon name="pin" size={17} /> Curitiba
               </a>
             </div>
@@ -2315,22 +2353,24 @@ export default function NataleluiaLandingPage() {
         }
         .program-card {
           position: relative;
-          transition: transform .35s ease, filter .35s ease;
+          transition: transform .35s ease;
         }
         .program-card:hover {
           transform: translateY(-6px);
-          filter: drop-shadow(0 20px 42px rgba(185,67,50,.22));
         }
-        .program-card svg {
-          filter: drop-shadow(0 20px 42px rgba(0,0,0,.28));
+        .program-card-photo {
+          overflow: hidden;
+          isolation: isolate;
+          clip-path: url(#program-card-clip);
+          -webkit-clip-path: url(#program-card-clip);
         }
         .program-card-image {
-          transform-box: fill-box;
-          transform-origin: center;
+          display: block;
+          transform-origin: center center;
           transition: transform .75s ease, filter .75s ease;
         }
         .program-card:hover .program-card-image {
-          transform: scale(1.055);
+          transform: scale(1.08);
           filter: saturate(1.08) brightness(1.05);
         }
         .experience-card {
