@@ -33,10 +33,21 @@ async function startLandingPage() {
 
     let source = await response.text();
 
-    source = source.replace(
-      /^import React, \{ useEffect, useMemo, useRef, useState \} from "react";\s*/m,
-      "const { useEffect, useMemo, useRef, useState } = React;\n\n"
-    );
+    const glowResponse = await fetch(`./src/BorderGlow.jsx?t=${Date.now()}`, { cache: "no-store" });
+    if (!glowResponse.ok) {
+      throw new Error("Nao foi possivel carregar o componente BorderGlow.");
+    }
+
+    let glowSource = await glowResponse.text();
+    glowSource = glowSource.replace(/^import[\s\S]*?from ["']react["'];\s*/m, "");
+    glowSource = glowSource.replace(/^import\s+["'][^"']*BorderGlow\.css["'];\s*/m, "");
+    glowSource = glowSource.replace(/export default BorderGlow;?\s*$/m, "");
+
+    source = source.replace(/^import React, \{([^}]+)\} from ["']react["'];\s*/m, (_, hooks) => {
+      return `const {${hooks}} = React;\n\n`;
+    });
+    source = source.replace(/^import\s+BorderGlow\s+from\s+["'][^"']+["'];\s*/m, "");
+    source = `${glowSource}\n${source}`;
 
     source = source.replace(
       /export default function NataleluiaLandingPage\(\)/,
