@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import BorderGlow from "./BorderGlow.jsx";
 
 const LOGO_URL = "./assets/logo-nataleluia.png";
 const HERO_VIDEO_URL = "./assets/hero.mp4";
@@ -184,6 +185,13 @@ const cards = [
     image: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=1000&auto=format&fit=crop",
     body: "Luz, projeção, som e experiências digitais ampliando o impacto da mensagem.",
   },
+  {
+    title: "Acessibilidade",
+    icon: "access",
+    image: "./assets/images/exp-acessibilidade.png?v=2",
+    imageFit: "contain",
+    body: "Ambiente planejado para receber a todos com conforto e autonomia.",
+  },
 ];
 
 const CARD_IMAGE_SHAPE =
@@ -243,9 +251,9 @@ function assertLandingPageData() {
   const uniqueCardTitles = new Set(cards.map((card) => card.title));
 
   console.assert(navItems.length === 6, "Teste: o menu deve conter 6 itens principais.");
-  console.assert(cards.length === 3, "Teste: a seção de experiências deve conter 3 cards.");
+  console.assert(cards.length === 4, "Teste: a seção de experiências deve conter 4 cards.");
   console.assert(cards.every((card) => card.title && card.body && card.icon), "Teste: cada card precisa de título, texto e ícone.");
-  console.assert(cards.every((card) => card.image && card.image.startsWith("https://")), "Teste: cada card precisa de uma imagem externa segura.");
+  console.assert(cards.every((card) => card.image && (card.image.startsWith("https://") || card.image.startsWith("./assets/"))), "Teste: cada card precisa de uma imagem válida.");
   console.assert(
     sectionNavItems.every((item) => item.href.startsWith("#")),
     "Teste: os links de seção do menu devem apontar para âncoras internas."
@@ -581,15 +589,15 @@ function EventSection() {
           <div>
             <p className="text-sm uppercase tracking-[0.45em] text-[#e2b1a6]">O Evento</p>
             <h2 className="font-hero mt-4 max-w-2xl text-[clamp(1.7rem,5vw,3.75rem)] font-light tracking-[-0.04em] text-white">
-              Uma história eterna, contada para transformar você hoje.
+              Uma história que transforma vidas ontem, hoje e para sempre.
             </h2>
           </div>
           <p className="max-w-md text-base leading-7 text-white/62">
-            Uma experiência que une arte, fé, emoção e tecnologia em uma apresentação envolvente, contemporânea e memorável.
+            Fé, arte e tecnologia em uma apresentação de Natal inesquecível e memorável.
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <svg width="0" height="0" className="absolute" aria-hidden="true">
             <defs>
               <clipPath id="program-card-clip" clipPathUnits="objectBoundingBox">
@@ -600,11 +608,11 @@ function EventSection() {
           {cards.map((card, index) => (
             <article key={card.title} className="program-card group mx-auto w-full max-w-[192px]">
               <div className="relative mx-auto aspect-[192/272] w-full max-w-[192px]">
-                <div className="program-card-photo absolute inset-0">
+                <div className={`program-card-photo absolute inset-0 ${card.imageFit === "contain" ? "bg-[#023645]" : ""}`}>
                   <img
                     src={card.image}
                     alt=""
-                    className="program-card-image absolute inset-0 h-full w-full object-cover"
+                    className={`program-card-image absolute inset-0 h-full w-full ${card.imageFit === "contain" ? "object-contain p-6" : "object-cover"}`}
                   />
                 </div>
                 <svg
@@ -631,7 +639,7 @@ function EventSection() {
                 </svg>
 
                 <div className="pointer-events-none absolute left-0 right-0 top-3 z-10 flex items-center justify-center px-5">
-                  <h3 className="rounded-full border border-white/14 bg-[#411010]/45 px-4 py-1.5 text-center text-[18px] font-light leading-none tracking-[-0.03em] text-[#f0ecb9] backdrop-blur-md">
+                  <h3 className="rounded-full border border-white/14 bg-[#411010]/45 px-3 py-1.5 text-center text-[clamp(13px,2.4vw,18px)] font-light leading-none tracking-[-0.03em] text-[#f0ecb9] backdrop-blur-md">
                     {card.title}
                   </h3>
                 </div>
@@ -676,17 +684,23 @@ function ExperienceSection() {
         <div className="lg:pl-6">
           <p className="text-sm uppercase tracking-[0.45em] text-[#e2b1a6]">A Experiência</p>
           <h2 className="font-hero mt-4 text-[clamp(1.7rem,5vw,3.75rem)] font-light tracking-[-0.04em] text-white">
-            Mais do que um evento, uma <span className="font-bold">mensagem viva.</span>
+            Mais do que um espetáculo de Natal, uma <span className="font-bold">mensagem viva.</span>
           </h2>
           <div className="mt-8 space-y-5 text-[14px] leading-7 text-white/72">
             <p>
-              É um espetáculo natalino que há mais de 20 anos celebra o nascimento de Jesus Cristo, o filho de Deus. Durante todos esses anos, esta história foi apresentada de forma festiva, contemporânea e com diferentes temáticas, envolvendo teatro, música, dança, coral e utilizando os mais atuais recursos artísticos e tecnológicos. O espetáculo é realizado por cerca de 800 voluntários e profissionais das mais diversas áreas, pensado e desenvolvido para envolver, contextualizar e cativar todas as idades.
+              O Nataleluia é um espetáculo natalino realizado pela Primeira Igreja Batista de Curitiba, há mais de 20 anos, com o objetivo de celebrar o nascimento de Jesus Cristo, o filho de Deus. Unindo fé, arte e tecnologia promove a reflexão sobre a verdade, o amor, a paz e a salvação que apenas Jesus nos oferece.
             </p>
             <p>
-              O espetáculo é realizado pela Primeira Igreja Batista de Curitiba, com o objetivo central de inspirar e promover a reflexão sobre a verdade, o amor, a paz e a salvação que Jesus nos oferece. Deus enviou o seu filho unigênito para que cada um de nós pudesse ter vida e vida em abundância, por vivermos rodeados por este amor incondicional é que desejamos torná-lo conhecido para o maior número de pessoas possível.
+              Durante todos esses anos, esta história é apresentada de forma contemporânea e com diferentes temáticas, pensado e desenvolvido para todas as idades. Com mais de 800 voluntários, o Nataleluia envolve diversas áreas artísticas, como teatro, música, dança, coral, e recursos tecnológicos modernos.
             </p>
             <p>
-              Demonstramos o nosso amor como igreja levando mantimentos e solidariedade ao próximo através da ABASC (Associação Batista de Ação Social de Curitiba), que auxilia famílias que precisam de apoio.
+              O valor levantado com os ingressos do Nataleluia é destinado para projetos da ABASC (Associação Batista de Ação Social de Curitiba), que auxilia famílias em situação de vulnerabilidade.
+            </p>
+            <p>
+              Por meio do Nataleluia, nosso propósito é fazer Jesus conhecido! Deus enviou o seu filho unigênito para que cada um de nós pudesse ter uma vida em abundância e desejamos que todos conheçam esse Amor!
+            </p>
+            <p>
+              Por isso, você é nosso convidado especial para fazer parte desse grande espetáculo, que vai além de uma apresentação de Natal, é uma mensagem viva sobre Aquele que era, é e sempre há de ser, o Salvador e Rei dos reis, Jesus!
             </p>
           </div>
         </div>
@@ -1310,14 +1324,27 @@ function SponsorSection() {
             Ao patrocinar o Nataleluia, você se torna parte de uma missão que impacta milhares de pessoas, ajudando a levar arte, fé e transformação para a nossa cidade e além. Junte-se a nós nessa celebração e faça parte dessa história!
           </p>
 
-          <a
-            href="https://patrocinadores.repagil.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex max-w-full items-center justify-center rounded-full bg-[#a92925] px-8 py-4 text-center text-[clamp(0.85rem,2.6vw,1.25rem)] font-medium uppercase tracking-[0.06em] text-white shadow-[0_18px_60px_rgba(169,41,37,.28)] transition hover:-translate-y-0.5 hover:bg-[rgba(46,94,74,0)] sm:mt-10 sm:px-14 sm:py-5"
+          <BorderGlow
+            className="border-glow-card--compact mt-8 inline-flex max-w-full transition hover:-translate-y-0.5 sm:mt-10"
+            backgroundColor="#a92925"
+            borderRadius={999}
+            glowRadius={36}
+            glowIntensity={1.15}
+            edgeSensitivity={16}
+            coneSpread={28}
+            glowColor="40 80 80"
+            colors={["#ff9f8f", "#f0ecb9", "#d54b39"]}
+            fillOpacity={0.45}
           >
-            Ser um patrocinador
-          </a>
+            <a
+              href="https://patrocinadores.repagil.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex max-w-full items-center justify-center px-8 py-4 text-center text-[clamp(0.85rem,2.6vw,1.25rem)] font-medium uppercase tracking-[0.06em] text-white sm:px-14 sm:py-5"
+            >
+              Ser um patrocinador
+            </a>
+          </BorderGlow>
         </div>
       </div>
       <div className="absolute inset-0 bg-[#411010]/20" />
@@ -2326,7 +2353,7 @@ export default function NataleluiaLandingPage() {
           height: 100%;
           max-width: 100%;
           object-fit: cover;
-          opacity: 0.7;
+          opacity: 0.8;
           filter: saturate(0.92) contrast(1.04) brightness(0.72);
           pointer-events: none;
           transform: translate3d(0,0,0);
@@ -2336,10 +2363,7 @@ export default function NataleluiaLandingPage() {
           inset: 0;
           z-index: 1;
           pointer-events: none;
-          background:
-            radial-gradient(circle at 72% 6%, rgba(106, 24, 24, 0.42), transparent 34%),
-            linear-gradient(90deg, rgba(65,16,16,.9), rgba(65,16,16,.44) 48%, rgba(65,16,16,.84)),
-            linear-gradient(180deg, rgba(65,16,16,.12), rgba(65,16,16,.62) 68%, rgba(65,16,16,.98) 100%);
+          background: rgba(65, 16, 16, 0.3);
         }
         .page-shell {
           position: relative;
