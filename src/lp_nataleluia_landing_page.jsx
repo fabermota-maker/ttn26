@@ -18,46 +18,7 @@ function timelinePhotosUrl(year) {
 }
 const SPONSOR_MONOGRAM_URL = "./assets/icons/nataleluia-monogram-n.png";
 
-const TIMELINE_2022_CARD_IMAGE_URL = `data:image/svg+xml,${encodeURIComponent(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="25 anos">
-  <defs>
-    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f0eeea"/>
-      <stop offset="100%" stop-color="#e4e0db"/>
-    </linearGradient>
-    <linearGradient id="washA" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#c9c8df"/>
-      <stop offset="45%" stop-color="#8d63b1"/>
-      <stop offset="100%" stop-color="#4d4d96"/>
-    </linearGradient>
-    <linearGradient id="washB" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#dddced"/>
-      <stop offset="42%" stop-color="#9b6bb9"/>
-      <stop offset="100%" stop-color="#3f428d"/>
-    </linearGradient>
-    <filter id="grain">
-      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
-      <feColorMatrix type="saturate" values="0"/>
-      <feComponentTransfer>
-        <feFuncA type="table" tableValues="0 0.05"/>
-      </feComponentTransfer>
-    </filter>
-  </defs>
-
-  <rect width="900" height="1200" fill="url(#paper)"/>
-  <rect width="900" height="1200" filter="url(#grain)"/>
-
-  <g opacity="0.12">
-    <circle cx="165" cy="182" r="86" fill="#ffffff"/>
-    <circle cx="748" cy="312" r="104" fill="#ffffff"/>
-    <circle cx="596" cy="980" r="120" fill="#ffffff"/>
-  </g>
-
-  <text x="150" y="590" fill="url(#washA)" font-family="Georgia, 'Times New Roman', serif" font-size="470" font-style="italic" font-weight="700" opacity="0.92">2</text>
-  <text x="388" y="795" fill="url(#washB)" font-family="Georgia, 'Times New Roman', serif" font-size="500" font-style="italic" font-weight="700" opacity="0.94">5</text>
-
-  <path d="M420 560c44 18 88 22 142 20 72-2 113-18 151-33 19-8 39 12 27 28-26 37-77 67-132 84-61 19-118 17-182 10z" fill="#5b4aa0" opacity="0.25"/>
-</svg>` )}`;
+const TIMELINE_2022_CARD_IMAGE_URL = "./assets/images/timeline-2022-25-anos.png";
 
 const N2026_PRESENTATION_IMAGE_URL =
   "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1600&auto=format&fit=crop";
@@ -170,19 +131,19 @@ const cards = [
   {
     title: "Música",
     icon: "music",
-    image: "https://images.unsplash.com/photo-1514306191717-452ec28c7814?q=80&w=1000&auto=format&fit=crop",
+    image: "./assets/images/exp-musica.png",
     body: "Trilhas, arranjos e vozes que conduzem o público por uma narrativa sensível e imersiva.",
   },
   {
     title: "Teatro",
     icon: "theater",
-    image: "https://images.unsplash.com/photo-1503095396549-807759245b35?q=80&w=1000&auto=format&fit=crop",
+    image: "./assets/images/exp-teatro.png?v=3",
     body: "Cenas, personagens e atuação ao vivo para contar a história eterna de forma contemporânea.",
   },
   {
     title: "Tecnologia",
     icon: "cpu",
-    image: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=1000&auto=format&fit=crop",
+    image: "./assets/images/exp-tecnologia.png",
     body: "Luz, projeção, som e experiências digitais ampliando o impacto da mensagem.",
   },
   {
@@ -190,7 +151,7 @@ const cards = [
     icon: "access",
     image: "./assets/images/exp-acessibilidade.png?v=2",
     imageFit: "contain",
-    body: "Ambiente planejado para receber a todos com conforto e autonomia.",
+    body: "Ambiente planejado: teremos libras, audiodescrição e espaço calmo.",
   },
 ];
 
@@ -711,121 +672,99 @@ function ExperienceSection() {
 
 function TimelineSection() {
   const timelineCards = [
-    { year: "2025", title: "Um Natal de Liberdade", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl4Cwb5gnKMTciQNiDEmukHjZMSScqBGJZrA&s", bgImage: TIMELINE_SELECTED_BG_URL, albumUrl: "https://www.flickr.com/search/?text=nataleluia+2025", description: "Com o tema “Um Natal de Liberdade”, o Nataleluia 2025 reunirá mais de 1.000 voluntários em um espetáculo inédito, que neste ano contará uma história emocionante inspirada em fatos reais. O enredo convida o público a refletir: qual o impacto de um pequeno grupo de pessoas reunidas em uma casa, sonhando em celebrar o verdadeiro Natal? “Um Natal de Liberdade” narra a trajetória de homens e mulheres com diferentes origens, mas unidos pela fé, que dão início a uma comunidade marcada pela comunhão, acolhimento e amor – mesmo quando isso exige renúncia. Serão cinco noites de apresentações para um público esperado de mais de 17 mil pessoas. Em cena, o espetáculo abordará dilemas culturais, a busca espiritual de um povo aflito e os sacrifícios necessários para espalhar a mensagem de Jesus. Tudo isso por meio de músicas originais, teatro, dança, tecnologia, performances circenses, orquestra e coral, em uma produção marcada pela emoção e excelência artística." },
-    { year: "2024", title: "MABBAT - A esperança", image: "https://image.isu.pub/241219004722-2cc008095b93962823667c3f8261f49a/jpg/page_1_thumb_large.jpg", bgImage: "https://wsrv.nl/?url=live.staticflickr.com/65535/54220544032_f6a152ea6c_b.jpg&output=jpg", albumUrl: "https://www.flickr.com/search/?text=nataleluia+2024", description: `MABBAT A ESPERANÇA, contém sequências com flashes de luz que podem afetar espectadores suscetíveis a epilepsia e outros distúrbios causados pela sensibilidade à luz.
-
-O Nataleluia é tão aguardado, que os ingressos esgotam em pouco tempo. O espetáculo atrai, inclusive, pessoas de fora de Curitiba e até de outros estados. São 27 anos de uma produção que aborda temas como fé, esperança e amor.` },
-    { year: "2023", title: "O Senhor do Tempo", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNPP0M-LIV1mOVJ-Qraj61mBkaXC8iTNliVw&s", bgImage: "https://media.gazetadopovo.com.br/2023/12/21115544/Imagem-do-WhatsApp-de-2023-12-21-%C3%A0s-09.18.40_4225f0b2.jpg.webp", albumUrl: "https://www.flickr.com/search/?text=nataleluia+2023", description: `O enredo deste ano segue a história emocionante de Seu Francisco, um relojoeiro cansado da vida, transportado para suas memórias mais profundas. Ao revisitar experiências marcantes com Aquele que traz esperança para o mundo, o espetáculo nos leva por uma viagem pelo tempo, sonhos e memórias daqueles que encontraram o Senhor do Tempo, cujas marcas permanecem indeléveis.
-
-Arte, Música e Solidariedade:
-O Nataleluia: O Senhor do Tempo contará com arranjos e canções originais do Clube de Composição da PIB Curitiba, com colaborações de Stênio Marcius, numa realização conjunta do CA Produções e Ministério.
-
-Compromisso Adoração.
-Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando o comprometimento da igreja com o bem-estar da comunidade.` },
+    { year: "2025", title: "Um Natal de Liberdade", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl4Cwb5gnKMTciQNiDEmukHjZMSScqBGJZrA&s", bgImage: TIMELINE_SELECTED_BG_URL, albumUrl: "https://www.flickr.com/search/?text=nataleluia+2025", description: "Com o tema “Um Natal de Liberdade”, o Nataleluia 2025 apresentou uma história emocionante inspirada em fatos reais. Mais de 1.000 voluntários deram vida à trajetória de homens e mulheres de diferentes origens, unidos pela fé e pelo desejo de celebrar o verdadeiro Natal.\nA história revelou o nascimento de uma comunidade marcada pela comunhão, pelo acolhimento e pelo amor, mesmo quando seguir esse caminho exigia renúncia. Em cinco noites de apresentações, mais de 17 mil pessoas acompanharam um espetáculo que reuniu músicas originais, teatro, dança, tecnologia, performances circenses, orquestra e coral." },
+    { year: "2024", title: "MABBAT – A Esperança", image: "https://image.isu.pub/241219004722-2cc008095b93962823667c3f8261f49a/jpg/page_1_thumb_large.jpg", bgImage: "https://wsrv.nl/?url=live.staticflickr.com/65535/54220544032_f6a152ea6c_b.jpg&output=jpg", albumUrl: "https://www.flickr.com/search/?text=nataleluia+2024", description: "“MABBAT – A Esperança” contou a história do nascimento de Jesus sob a perspectiva de Isabel e Zacarias. foram 5 noites de apresentações com quase 400 artistas no palco e mais de 600 voluntários no backstage.\nA produção foi 100% autoral. Uma equipe de 10 roteiristas e 6 produtores musicais trabalhou por meses até chegar ao roteiro final, um entrelaçamento da história de Isabel e Zacarias com a de Maria. O casal, que não podia ter filhos, por conta da idade avançada e da esterilidade de Isabel, recebe uma revelação do anjo Gabriel de que daria à luz a um profeta: João Batista, que prepararia o caminho para o Messias. Maria também recebe a notícia, do mesmo anjo, de que seria mãe, e justamente do Filho do Altíssimo. Então nasce Jesus." },
+    { year: "2023", title: "O Senhor do Tempo", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNPP0M-LIV1mOVJ-Qraj61mBkaXC8iTNliVw&s", bgImage: "https://media.gazetadopovo.com.br/2023/12/21115544/Imagem-do-WhatsApp-de-2023-12-21-%C3%A0s-09.18.40_4225f0b2.jpg.webp", albumUrl: "https://www.flickr.com/search/?text=nataleluia+2023", description: "Em “O Senhor do Tempo”, o público conheceu a história de Seu Francisco, um relojoeiro cansado da vida que é levado a revisitar suas memórias e experiências mais profundas.\nEm uma viagem pelo tempo, sonhos e lembranças, o espetáculo apresentou histórias de pessoas que encontraram esperança n’Aquele que transforma vidas, deixando marcas que permanecem para sempre.\nA edição contou com arranjos e canções originais do Clube de Composição da PIB Curitiba e colaborações de Stênio Marcius." },
     {
       year: "2022",
       title: "25 anos",
       image: TIMELINE_2022_CARD_IMAGE_URL,
       bgImage: "https://nataleluia.com.br/wp-content/uploads/2024/09/52615653741_7fb121d085_o.jpg",
-      albumUrl: "https://www.flickr.com/search/?text=nataleluia+2022",
-    },
-    { year: "2021", title: "Um lugar para Nascer", image: "./assets/images/timeline-2021-um-lugar-para-nascer.png", albumUrl: "https://www.flickr.com/search/?text=nataleluia+2021" },
-    { year: "2020", title: "Um Olhar para o Céu", image: "./assets/images/timeline-2020-um-olhar-para-o-ceu.png", albumUrl: "https://www.flickr.com/search/?text=nataleluia+2020" },
+      albumUrl: "https://www.flickr.com/search/?text=nataleluia+2022", description: "Celebrando 25 anos de história, o Nataleluia revisitou sua própria trajetória e mostrou como a mensagem do Natal pode atravessar gerações.\nA edição destacou a transformação do espetáculo ao longo dos anos, incorporando novas linguagens, cenários, músicas e formas de contar uma história que continua sendo anunciada de diferentes maneiras." },
+    { year: "2021", title: "Um Lugar para Nascer", image: "./assets/images/timeline-2021-um-lugar-para-nascer.png", albumUrl: "https://www.flickr.com/search/?text=nataleluia+2021", description: "O Nataleluia de 2021 contou a história de um casal de jovens da Galileia, que recebe o maior presente e a maior responsabilidade de toda sua vida: em sua família nascerá o bebê que será o Salvador. Num período turbulento, o casal parte à cidade de Belém na Judéia. Será que há lugar onde eles possam se abrigar? A novidade de 2021 é que o espetáculo foi 100% autoral, com canções, arranjos e roteiro produzidos pelos voluntários da PIB Curitiba. Inspirado em grandes musicais, a apresentação vai envolver atores, cantores e bailarinos para contar a história do nascimento de Jesus." },
+    { year: "2020", title: "Um Olhar para o Céu", image: "./assets/images/timeline-2020-um-olhar-para-o-ceu.png", albumUrl: "https://www.flickr.com/search/?text=nataleluia+2020", description: "“Um Olhar para o Céu” marcou mais um capítulo da história do Nataleluia, apresentando a mensagem do Natal por meio de novas linguagens, cenários e músicas.\nEm uma edição marcada por um contexto diferente para o mundo, tivemos um espetáculo híbrido, com um filme e manifestações artísticas presencialmente" },
     {
       year: "2019",
       title: "O Esplendor do Natal",
       image: "./assets/images/timeline-2019-o-esplendor-do-natal.png",
       albumUrl: "https://www.flickr.com/search/?text=nataleluia+2019",
-      description:
-        "Com uma atmosfera de um programa de rádio apresentado na noite de Natal, belas canções natalinas e uma grande variedade de gêneros musicais, o radialista, por meio de sua locução, vai ensinando o verdadeiro significado da data, convidando os participantes a louvarem a Jesus, para comemorar o Esplendor do Natal.",
+      description: "Com a atmosfera de um programa de rádio transmitido na noite de Natal, “O Esplendor do Natal” apresentou uma combinação de canções natalinas e diferentes gêneros musicais.\nPor meio da locução de um radialista, o público foi conduzido a redescobrir o verdadeiro significado da data e convidado a celebrar e louvar a Jesus, o verdadeiro motivo do Natal.",
     },
     {
       year: "2018",
-      title: "De Belén para a Cruz",
+      title: "De Belém para a Cruz",
       image: "./assets/images/timeline-2018-de-belen-para-a-cruz.png",
       albumUrl: "https://www.flickr.com/search/?text=nataleluia+2018",
-      description:
-        "Apresenta a mensagem de Natal com performances ao vivo e participação de mais de 700 voluntários. O evento reúne orquestra, teatro, dança, um grande coral e efeitos especiais. Ingressos pelo site nataleluia.com.br a partir do dia 01 de setembro de 2018.",
+      description: "“De Belém para a Cruz” apresentou a mensagem do Natal por meio de uma grande produção ao vivo, reunindo mais de 700 voluntários.\nOrquestra, teatro, dança, um grande coral e efeitos especiais se encontraram em um espetáculo que conectou o nascimento de Jesus à história da salvação.",
     },
     {
       year: "2017",
       title: "20 anos de história",
       image: "./assets/images/timeline-2017-20-anos-de-historia.png",
-      albumUrl: "https://www.flickr.com/search/?text=nataleluia+2017",
-    },
+      albumUrl: "https://www.flickr.com/search/?text=nataleluia+2017", description: "Em 2017, o Nataleluia celebrou 20 anos de história.\nA edição revisitou a trajetória do espetáculo e mostrou como, ao longo de duas décadas, a mensagem do Natal ganhou novas linguagens, cenários, músicas e formas de alcançar diferentes gerações." },
     {
       year: "2016",
       title: "O Encontro",
       image: "./assets/images/timeline-2016-o-encontro.png",
       albumUrl: "https://www.flickr.com/search/?text=nataleluia+2016",
-      description:
-        "Cerca de 500 voluntários: músicos, atores, cantores, roteiristas, cenógrafos, bailarinos, publicitários e muitos outros profissionais se unem para celebrar em Curitiba, o verdadeiro sentido do natal.\n\nUm público de mais de 45 mil pessoas já assistiram o evento e se emocionaram com as apresentações que já acontecem há mais de 15 anos e reúne: vídeo, teatro, dança, tecnologia, coral e orquestra em um musical que encanta a todas as idades.\n\nO Nataleluia já faz parte da agenda cultural de Curitiba, muito mais do que uma cantata de natal, o evento tem como objetivo também arrecadar alimentos para a confecção e distribuição de cestas básicas para a população carente.",
+      description: "Em “O Encontro”, cerca de 500 voluntários, entre músicos, atores, cantores, roteiristas, cenógrafos, bailarinos, publicitários e diversos outros profissionais, se uniram para celebrar o verdadeiro sentido do Natal.\nJá parte da agenda cultural de Curitiba, o Nataleluia também reafirmou seu compromisso com a solidariedade, arrecadando alimentos destinados à produção e distribuição de cestas básicas para famílias em situação de vulnerabilidade.",
     },
     {
       year: "2015",
       title: "As Cores do Amanhã",
       image: "./assets/images/timeline-2015-as-cores-do-amanha.png",
-      description:
-        "A história mostrou as aventuras de Aurora e seu irmão Felipe, que vivem em uma cidade cinza e triste onde ser feliz era proibido. Mas uma nova e colorida cidade surge. Neste local, eles aprenderam a cantar, sorrir, brincar e o verdadeiro significado do Natal.",
+      description: "“As Cores do Amanhã” contou a história de Aurora e seu irmão Felipe, que viviam em uma cidade cinza e triste, onde ser feliz era proibido.\nQuando uma nova cidade, cheia de cores, surge em seu caminho, os irmãos descobrem novas formas de cantar, sorrir e brincar, e encontram um novo significado para o Natal.",
     },
     {
       year: "2014",
       title: "Natal de História",
       image: "./assets/images/timeline-2014-natal-de-historia.png",
-      description:
-        "Natal de histórias foi o tema do Nataleluia de 2014. Nele, três personagens encontraram-se para ouvir histórias de Jesus Cristo.",
+      description: "Em “Natal de História”, três personagens se encontram para ouvir histórias sobre Jesus Cristo.\nA edição convidou o público a olhar para o Natal por meio de diferentes relatos, descobrindo, através dessas histórias, a mensagem de esperança presente no nascimento de Jesus.",
     },
     {
       year: "2013",
       title: "Natal do Coração",
       image: "./assets/images/timeline-2013-natal-do-coracao.png",
-      description:
-        "Em 2013, a história foi sobre um menino que era apaixonado por futebol, e tinha o sonho de ser jogador da seleção brasileira. No meio do caminho enfrentou muitos obstáculos até perceber a importância de Jesus na sua vida.",
+      description: "“Natal do Coração” acompanhou a história de um menino apaixonado por futebol que sonhava em se tornar jogador da seleção brasileira.\nAo longo de sua jornada, ele enfrentou obstáculos e descobriu que alguns dos maiores sonhos da vida não estão relacionados apenas às conquistas que podemos alcançar, mas à importância de ter Jesus no coração.",
     },
     {
       year: "2012",
       title: "Nasce a Esperança",
       image: "./assets/images/timeline-2012-nasce-a-esperanca.png",
-      description:
-        "Três personagens são apresentados: Augusto, Sofia e Marina. Cada um deles ganhou de presente um livro mágico, que os levou a uma viagem ao passado, ao encontro de previsões feitas pelos profetas Isaías, Jeremias e Miqueias.",
+      description: "Em “Nasce a Esperança”, três personagens, Augusto, Sofia e Marina, recebem um presente especial: um livro mágico que os conduz em uma viagem pelo passado.\nNessa jornada, eles encontram as profecias de Isaías, Jeremias e Miqueias e descobrem que, muito antes de seu nascimento, já havia uma promessa de esperança sendo anunciada.",
     },
     { year: "2011", title: "Noite de esperança.", image: "./assets/images/timeline-2011-noite-de-esperanca.png", description: "Na edição de 2011, a iluminação teve seu destaque, assim como a tecnologia de projeção chamada mapping. Todo o conceito do espetáculo, desde cenários até figurino, foi baseado no Cubo Rubik, ou Cubo mágico" },
-    { year: "2010", title: "Violeta Caron retorna à sua casa", image: "./assets/images/timeline-2010-violeta-caron-retorna-a-sua-casa.png" },
+    { year: "2010", title: "Violeta Caron retorna à sua casa", image: "./assets/images/timeline-2010-violeta-caron-retorna-a-sua-casa.png", description: "A edição de 2010, “Violeta Caron retorna à sua casa”, faz parte da trajetória do Nataleluia e revela como esta história foi sendo contada ao longo dos anos com novas linguagens, cenários, músicas e mensagens para diferentes gerações." },
     {
       year: "2009",
       title: "Além do Espetáculo",
       image: "./assets/images/timeline-2009-alem-do-espetaculo.png",
-      description:
-        "O templo da Primeira Igreja Batista (PIB) de Curitiba, no Batel, vai ser transformado em um grande teatro, com direito a cortina vermelha, cenário e efeitos de iluminação e de som. No palco, Demétrio, um talentoso ator, participa de um musical de Natal e, quando o show está quase terminando, percebe que está preso nele. Com a ajuda de contrarregras, o rapaz vai lutar para fugir do mundo da ficção e tirar as máscaras para encontrar o mundo real, no qual a sua vida tem um propósito que vai muito além do espetáculo.",
+      description: "O templo da Primeira Igreja Batista (PIB) de Curitiba, no Batel, vai ser transformado em um grande teatro, com direito a cortina vermelha, cenário e efeitos de iluminação e de som. No palco, Demétrio, um talentoso ator, participa de um musical de Natal e, quando o show está quase terminando, percebe que está preso nele. Com a ajuda de contrarregras, o rapaz vai lutar para fugir do mundo da ficção e tirar as máscaras para encontrar o mundo real, no qual a sua vida tem um propósito que vai muito além do espetáculo.",
     },
     {
       year: "2008",
       title: "Natal de Luz",
       image: "./assets/images/timeline-2008-natal-de-luz.png",
-      description:
-        "Figuras geométricas representando a tradicional imagem do presépio. Reis magos chegando de bicicleta para adorar o menino Jesus. Cenários que incluem desenhos a laser. O Nataleluia, espetáculo de Natal da Primeira Igreja Batista de Curitiba, encena este ano a Natividade sob o tema “Natal de Luz”, contando para isso com o auxílio da tecnologia e de avançadas técnicas de som e iluminação. O foco, no entanto, não está em nenhuma dessas inovações, mas no coração da mensagem natalina: o nascimento de filho de Deus, que veio para trazer salvação a todos que nele depositarem sua fé.",
+      description: "Figuras geométricas representando a tradicional imagem do presépio. Reis magos chegando de bicicleta para adorar o menino Jesus. Cenários que incluem desenhos a laser. O Nataleluia, espetáculo de Natal da Primeira Igreja Batista de Curitiba, encena este ano a Natividade sob o tema “Natal de Luz”, contando para isso com o auxílio da tecnologia e de avançadas técnicas de som e iluminação. O foco, no entanto, não está em nenhuma dessas inovações, mas no coração da mensagem natalina: o nascimento de filho de Deus, que veio para trazer salvação a todos que nele depositarem sua fé.",
     },
     {
       year: "2007",
       title: "Natal do Coração",
       image: "./assets/images/timeline-2007-natal-do-coracao.png",
-      description:
-        "Cerca de 500 profissionais e voluntários estão envolvidos no trabalho. Desde fevereiro músicos cristãos aceitaram o desafio de compor oito músicas com ritmos brasileiros, que vão do samba à MPB, especialmente para o Nataleluia. O espetáculo terá um cenário de sonho e, nele, um garoto em busca da felicidade. Aventura, dança, teatro, futebol e interatividade são alguns dos ingredientes que estão sendo preparados. “A ideia é falar de sonhos que precisam ser entregues a Deus”, diz o pastor Paulo Davi e Silva, do Ministério de Adoração da PIB.",
+      description: "Cerca de 500 profissionais e voluntários estão envolvidos no trabalho. Desde fevereiro músicos cristãos aceitaram o desafio de compor oito músicas com ritmos brasileiros, que vão do samba à MPB, especialmente para o Nataleluia. O espetáculo terá um cenário de sonho e, nele, um garoto em busca da felicidade. Aventura, dança, teatro, futebol e interatividade são alguns dos ingredientes que estão sendo preparados. “A ideia é falar de sonhos que precisam ser entregues a Deus”, diz o pastor Paulo Davi e Silva, do Ministério de Adoração da PIB.",
     },
-    { year: "2006", title: "Uma Noite de Milagre", image: "./assets/images/timeline-2006-uma-noite-de-milagre.png" },
+    { year: "2006", title: "Uma Noite de Milagre", image: "./assets/images/timeline-2006-uma-noite-de-milagre.png", description: "A edição de 2006, “Uma Noite de Milagre”, faz parte da trajetória do Nataleluia e revela como esta história foi sendo contada ao longo dos anos com novas linguagens, cenários, músicas e mensagens para diferentes gerações." },
     {
       year: "2005",
-      title: "O Proósito do Natal",
+      title: "O Propósito do Natal",
       image: "./assets/images/timeline-2005-o-proposito-do-natal.png",
-      description:
-        "Uma cruz feita de luzes marcou o ponto alto da apresentação. A história apresentou um escritor que buscava o sentido da vida nos livros e no conhecimento, mas que só encontrou paz no amor de Jesus.",
+      description: "Uma cruz feita de luzes marcou o ponto alto da apresentação. A história apresentou um escritor que buscava o sentido da vida nos livros e no conhecimento, mas que só encontrou paz no amor de Jesus.",
     },
     {
       year: "2004",
       title: "Jornada da Esperança",
       image: "./assets/images/timeline-2004-jornada-da-esperanca.png",
-      description:
-        "Os espectadores viajaram pelo tempo na fantástica jornada da esperança. Na história, o nascimento de Jesus foi representado aqui no Brasil, em Belém do Pará. O espetáculo ainda teve a apresentação do Nataleluia...",
+      description: "Os espectadores viajaram pelo tempo na fantástica jornada da esperança. Na história, o nascimento de Jesus foi representado aqui no Brasil, em Belém do Pará. O espetáculo ainda teve a apresentação do Nataleluia...",
     },
     {
       year: "2003",
@@ -837,36 +776,31 @@ Está iniciativa social leva mantimentos a famílias necessitadas, demonstrando 
       year: "2002",
       title: "A Glória do Senhor",
       image: "./assets/images/timeline-2002-a-gloria-do-senhor.png",
-      description:
-        "De uma forma bem humorada, a encenação resgata personagens dos anos anteriores e utilizando-se da metalinguagem, participam da produção do espetáculo, levando o público a entender o verdadeiro sentido do Natal.",
+      description: "De uma forma bem humorada, a encenação resgata personagens dos anos anteriores e utilizando-se da metalinguagem, participam da produção do espetáculo, levando o público a entender o verdadeiro sentido do Natal.",
     },
     {
       year: "2001",
       title: "Bem Vindo ao Nosso Mundo",
       image: "./assets/images/timeline-2001-bem-vindo-ao-nosso-mundo.png",
-      description:
-        "Em 2001, ano que entrou para a história por conta do atentado terrorista às Torres Gêmeas, o Nataleluia falou da vida de Jesus Cristo e fez um paralelo com os tristes acontecimentos.",
+      description: "Em 2001, ano que entrou para a história por conta do atentado terrorista às Torres Gêmeas, o Nataleluia falou da vida de Jesus Cristo e fez um paralelo com os tristes acontecimentos.",
     },
     {
       year: "2000",
       title: "Natal Inesquecível",
       image: "./assets/images/timeline-2000-natal-inesquecivel.png",
-      description:
-        "Tia Flora e sobrinhas. Livro gigante no palco contavam a história. Pr. Paschoal explica o plano de salvação e o verdadeiro sentido do Natal.",
+      description: "Tia Flora e sobrinhas. Livro gigante no palco contavam a história. Pr. Paschoal explica o plano de salvação e o verdadeiro sentido do Natal.",
     },
     {
       year: "1999",
       title: "Natal é Deus por nós",
       image: "./assets/images/timeline-1999-natal-e-deus-por-nos.png",
-      description:
-        "Neste ano, o evento contou com um belíssimo musical: orquestra de sinos, conjunto de pandeiros, 12 teclados, além de teatro, dança, coro Nataleluia e orquestra sinfônica.",
+      description: "Neste ano, o evento contou com um belíssimo musical: orquestra de sinos, conjunto de pandeiros, 12 teclados, além de teatro, dança, coro Nataleluia e orquestra sinfônica.",
     },
     {
       year: "1998",
       title: "Natal em Sua Casa",
       image: "./assets/images/timeline-1998-natal-em-sua-casa.png?v=2",
-      description:
-        "O público encantou-se com uma família formada por três gerações. A cativante e curiosa tia Flora, que não conhecia a verdadeira história do Natal, foi destaque na apresentação. Com ajuda de um pequeno garoto, do coral, da orquestra e do teatro, tia Flora compreendeu o significado da data.",
+      description: "O público se encantou com a história de uma família formada por três gerações. Entre os personagens estava a cativante e curiosa tia Flora, que ainda não conhecia a verdadeira história do Natal.\nCom a ajuda de um pequeno garoto, do coral, da orquestra e do teatro, tia Flora descobre o verdadeiro significado da data e se deixa envolver pela mensagem do Natal.",
     },
     {
       year: "1997",
@@ -1337,7 +1271,7 @@ function SponsorSection() {
             fillOpacity={0.45}
           >
             <a
-              href="https://patrocinadores.repagil.com/"
+              href="https://nataleluia.repagildigital.com.br/lp.php#"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex max-w-full items-center justify-center px-8 py-4 text-center text-[clamp(0.85rem,2.6vw,1.25rem)] font-medium uppercase tracking-[0.06em] text-white sm:px-14 sm:py-5"
@@ -1393,84 +1327,31 @@ function SponsorsBanner() {
 }
 
 function CheckoutPage() {
-  const [selectedDates, setSelectedDates] = useState(["19"]);
-  const [selectedTicket, setSelectedTicket] = useState("individual");
-  const [familyQuantity, setFamilyQuantity] = useState(2);
-  const [selectedTimesByDate, setSelectedTimesByDate] = useState({
-    "19": "17h",
-    "20": "17h",
-    "22": "17h",
-    "23": "17h",
-    "25": "17h",
-  });
-
   const presentationDates = [
-    { day: "19", month: "Dezembro" },
-    { day: "20", month: "Dezembro" },
-    { day: "22", month: "Dezembro" },
-    { day: "23", month: "Dezembro" },
-    { day: "25", month: "Dezembro" },
+    { day: '18', url: 'https://www.diskingressos.com.br/event/4194' },
+    { day: '19', url: 'https://www.diskingressos.com.br/event/4199' },
+    { day: '21', url: 'https://www.diskingressos.com.br/event/4200' },
+    { day: '22', url: 'https://www.diskingressos.com.br/event/4201' },
+    { day: '23', url: 'https://www.diskingressos.com.br/event/4202' },
   ];
-
-  const timeOptions = ["17h", "19h"];
-
-  const ticketOptions = [
-    { id: "individual", name: "Individual", price: 15, description: "Acesso para uma pessoa ao Nataleluia." },
-    { id: "familia", name: "Família", price: 20, description: "Pacote para participação em família." },
-    { id: "menor-visibilidade", name: "Menor visibilidade", price: 10, description: "Entrada com assento de menor visibilidade." },
-  ];
-
-  const selectedTicketOption = ticketOptions.find((ticket) => ticket.id === selectedTicket) || ticketOptions[0];
-  const ticketMultiplier = selectedTicket === "familia" ? familyQuantity : 1;
-  const subtotal = selectedTicketOption.price * selectedDates.length * ticketMultiplier;
-  const serviceFee = 0;
-  const total = subtotal + serviceFee;
-  const currency = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
-
-  const toggleDate = (day) => {
-    setSelectedDates((current) => {
-      if (current.includes(day)) {
-        return current.length === 1 ? current : current.filter((item) => item !== day);
-      }
-      return [...current, day].sort((a, b) => Number(a) - Number(b));
-    });
-  };
-
-  const selectTimeForDate = (day, time) => {
-    setSelectedTimesByDate((current) => ({ ...current, [day]: time }));
-    setSelectedDates((current) => {
-      if (current.includes(day)) return current;
-      return [...current, day].sort((a, b) => Number(a) - Number(b));
-    });
-  };
-
-  const updateFamilyQuantity = (nextQuantity) => {
-    setFamilyQuantity(Math.max(2, Math.min(10, nextQuantity)));
-    setSelectedTicket("familia");
-  };
-
-  const selectedSchedule = selectedDates
-    .map((day) => `${day}/12 às ${selectedTimesByDate[day] || "17h"}`)
-    .join(", ");
 
   return (
     <section id="ingresso" className="relative min-h-screen bg-[#411010] px-4 pb-10 pt-28 sm:px-6">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_16%,rgba(185,67,50,.20),transparent_30%),linear-gradient(180deg,rgba(65,16,16,.74),#411010_72%)]" />
       <div className="relative z-10 mx-auto max-w-6xl">
-        <div className="grid gap-4 lg:grid-cols-[1.08fr_.92fr]">
-          <div className="h-auto min-w-0 rounded-[1.5rem] border border-white/10 bg-white/[0.045] px-4 pb-0 pt-0 backdrop-blur-xl sm:px-5 lg:min-h-[778px]">
+        <div className="grid gap-4">
+          <div className="h-auto min-w-0 rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-5 backdrop-blur-xl sm:p-6">
             <h2 className="mb-3 text-[15px] font-medium text-white">Escolha as datas da apresentação</h2>
             <div className="mb-6 grid grid-cols-2 gap-x-3 gap-y-6 overflow-visible px-1 py-2 sm:grid-cols-3 sm:gap-x-4 sm:px-2 lg:grid-cols-5">
               {presentationDates.map((date, index) => {
-                const isSelected = selectedDates.includes(date.day);
+                const isSelected = false;
 
                 return (
                   <div key={date.day} className="flex w-full max-w-[124px] flex-col items-center justify-self-center overflow-visible">
-                    <button
-                      type="button"
-                      onClick={() => toggleDate(date.day)}
+                    <a
+                      href={date.url}
                       className="group relative aspect-[118/154] h-auto w-full max-w-[118px] text-left transition hover:-translate-y-1"
-                      aria-pressed={isSelected}
+                      aria-label={`Comprar ingresso para ${date.day} de dezembro`}
                     >
                       <svg
                         viewBox="0 0 192 272"
@@ -1504,154 +1385,18 @@ function CheckoutPage() {
 
                         <div className="w-full">
                           <span className={`mx-auto inline-flex w-full items-center justify-center rounded-full border px-2 py-1.5 text-[8px] font-semibold uppercase tracking-[0.12em] ${isSelected ? "border-[#d54b39] bg-[#d54b39]/18 text-white" : "border-white/10 bg-white/5 text-white/56"}`}>
-                            {isSelected ? "Selecionado" : "Selecionar"}
+                            Ingressos
                           </span>
                         </div>
                       </div>
-                    </button>
+                    </a>
 
-                    <div className="mt-2 grid w-full grid-cols-2 gap-1.5">
-                      {timeOptions.map((time) => {
-                        const isTimeSelected = (selectedTimesByDate[date.day] || "17h") === time;
-                        return (
-                          <button
-                            key={`${date.day}-${time}`}
-                            type="button"
-                            onClick={() => selectTimeForDate(date.day, time)}
-                            className={`rounded-full border px-2 py-1.5 text-[10px] font-semibold transition ${isSelected && isTimeSelected ? "border-[#d54b39] bg-[#d54b39]/22 text-white" : "border-white/10 bg-white/5 text-white/58 hover:border-[#d54b39]/45 hover:text-white"}`}
-                            aria-pressed={isSelected && isTimeSelected}
-                          >
-                            {time}
-                          </button>
-                        );
-                      })}
-                    </div>
                   </div>
                 );
               })}
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2">
-              <input className="rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#d54b39]/70" placeholder="Nome completo" />
-              <input className="rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#d54b39]/70" placeholder="E-mail" />
-              <input className="rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#d54b39]/70" placeholder="Telefone" />
-              <input className="rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#d54b39]/70" placeholder="CPF" />
-            </div>
-
-            <div className="my-[15px] flex w-full max-w-[669px] flex-col gap-0 rounded-[1.1rem] border border-white/10 bg-[#1b1e31]/70 px-4 pb-0 pt-0">
-              <p className="text-[12px] leading-5 text-white/82">
-                IMPORTANTE: O ingresso é válido até 10 minutos após o início do espetáculo (20h10min). Após esse período, o assento poderá ser disponibilizado para outra pessoa.
-              </p>
-            </div>
-
-            <div className="flex-1">
-              <h2 className="mb-3 text-[15px] font-medium text-white">Escolha seu ingresso</h2>
-              <div className="grid gap-3">
-                {ticketOptions.map((ticket) => {
-                  const isSelectedTicket = selectedTicket === ticket.id;
-
-                  return (
-                    <div
-                      key={ticket.name}
-                      className={`flex items-center justify-between gap-3 rounded-[1.1rem] border p-4 text-left transition ${isSelectedTicket ? "border-[#d54b39] bg-[#d54b39]/14" : "border-white/10 bg-[#1b1e31]/70 hover:border-[#d54b39]/60 hover:bg-[#10243e]/80"}`}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => setSelectedTicket(ticket.id)}
-                        className="flex flex-1 items-start gap-3 text-left"
-                        aria-pressed={isSelectedTicket}
-                      >
-                        <span className={`mt-1 grid h-4 w-4 place-items-center rounded-full border ${isSelectedTicket ? "border-[#d54b39]" : "border-white/25"}`}>
-                          {isSelectedTicket && <span className="h-2 w-2 rounded-full bg-[#d54b39]" />}
-                        </span>
-                        <span>
-                          <span className="block text-sm font-medium text-white">{ticket.name}</span>
-                          <span className="mt-1 block text-xs leading-5 text-white/55">{ticket.description}</span>
-                        </span>
-                      </button>
-
-                      <div className="flex flex-col items-end gap-2">
-                        <strong className="whitespace-nowrap text-sm font-semibold text-[#f0ecb9]">{currency.format(ticket.price)}</strong>
-                        {ticket.id === "familia" && isSelectedTicket && (
-                          <div className="flex items-center gap-1 rounded-full border border-[#d54b39]/45 bg-[#411010]/55 px-1.5 py-1">
-                            <button
-                              type="button"
-                              onClick={() => updateFamilyQuantity(familyQuantity - 1)}
-                              className="grid h-6 w-6 place-items-center rounded-full bg-white/8 text-xs text-white transition hover:bg-[#d54b39]/40"
-                              aria-label="Diminuir quantidade de familiares"
-                            >
-                              −
-                            </button>
-                            <span className="min-w-7 text-center text-xs font-semibold text-white">{familyQuantity}</span>
-                            <button
-                              type="button"
-                              onClick={() => updateFamilyQuantity(familyQuantity + 1)}
-                              className="grid h-6 w-6 place-items-center rounded-full bg-white/8 text-xs text-white transition hover:bg-[#d54b39]/40"
-                              aria-label="Aumentar quantidade de familiares"
-                            >
-                              +
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
           </div>
-
-          <aside className="rounded-[1.5rem] border border-[#d54b39]/20 bg-[#12213a]/82 p-5 shadow-[0_30px_120px_rgba(0,0,0,.34)] backdrop-blur-xl">
-            <p className="text-[11px] uppercase tracking-[0.28em] text-[#e2b1a6]">Resumo</p>
-            <div className="mt-4 rounded-[1.25rem] bg-black/18 p-4">
-              <div className="flex justify-between gap-4 border-b border-white/10 pb-3 text-white/78">
-                <span>{selectedTicketOption.name}{selectedTicket === "familia" ? ` × ${familyQuantity} familiares` : ""}</span>
-                <strong>{currency.format(selectedTicketOption.price)}</strong>
-              </div>
-              <div className="flex justify-between gap-4 border-b border-white/10 py-3 text-white/55">
-                <span>{selectedDates.length > 1 ? "Datas selecionadas" : "Data selecionada"}</span>
-                <span>{selectedSchedule}</span>
-              </div>
-              <div className="flex justify-between gap-4 border-b border-white/10 py-3 text-white/55">
-                <span>{selectedDates.length} dia(s) × {currency.format(selectedTicketOption.price)}{selectedTicket === "familia" ? ` × ${familyQuantity}` : ""}</span>
-                <span>{currency.format(subtotal)}</span>
-              </div>
-              <div className="flex justify-between gap-4 border-b border-white/10 py-3 text-white/55">
-                <span>Taxa de serviço</span>
-                <span>{currency.format(serviceFee)}</span>
-              </div>
-              <div className="flex justify-between gap-4 pt-4 text-xl font-semibold text-white">
-                <span>Total</span>
-                <span>{currency.format(total)}</span>
-              </div>
-            </div>
-
-            <div className="mt-5 grid gap-2.5">
-              {["Cartão de crédito", "PIX", "Boleto"].map((method, index) => (
-                <button
-                  key={method}
-                  type="button"
-                  className={`rounded-full border px-4 py-3 text-left text-sm transition ${index === 0 ? "border-[#d54b39] bg-[#d54b39]/15 text-white" : "border-white/10 bg-white/5 text-white/60 hover:text-white"}`}
-                >
-                  {method}
-                </button>
-              ))}
-            </div>
-
-            <button className="mt-5 w-full rounded-full bg-[#d54b39] px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.10em] text-white shadow-[0_20px_60px_rgba(213,75,57,.28)] transition hover:bg-[#e25745]">
-              Finalizar inscrição
-            </button>
-
-            <div className="mt-5 flex justify-center border-t border-white/10 pt-5">
-              <img
-                src={COMPROMISSO_ADORACAO_LOGO_URL}
-                alt="Compromisso Adoração"
-                className="compromisso-adoracao-logo h-auto w-[165px] object-contain opacity-95"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
-          </aside>
         </div>
       </div>
     </section>
@@ -1812,21 +1557,22 @@ function N2026Page() {
           >
             <div className="n2026-float-card-glow" aria-hidden="true" />
             <img
-              src={N2026_PRESENTATION_IMAGE_URL}
-              alt="Apresentação Compromisso Adoração 2026"
-              className="h-[clamp(220px,52vw,480px)] w-full object-cover"
+              src="./assets/images/nataleluia-2026-banner.png"
+              alt="Nataleluia 2026 — A Maior História de Todas"
+              className="block h-auto w-full"
               loading="eager"
               decoding="async"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(65,16,16,.12),rgba(65,16,16,.55)_58%,rgba(65,16,16,.92))]" />
-            <div className="absolute inset-x-0 bottom-0 z-[2] flex flex-col items-start gap-3 p-5 sm:p-8">
+            <div className="absolute right-0 top-0 z-[2] p-3 sm:p-5">
               <img
                 src={COMPROMISSO_ADORACAO_LOGO_URL}
                 alt="Compromisso Adoração"
-                className="compromisso-adoracao-logo h-auto w-[min(220px,58vw)] object-contain"
+                className="compromisso-adoracao-logo h-auto w-[clamp(80px,18vw,180px)] object-contain"
                 loading="eager"
                 decoding="async"
               />
+            </div>
+            <div className="absolute bottom-0 left-0 z-[2] p-5 sm:p-8">
               <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#f0ecb9]/88">
                 <N2026BrandMark />
               </p>
@@ -1834,16 +1580,19 @@ function N2026Page() {
           </div>
 
           <div className="mx-auto mt-10 max-w-3xl text-center">
-            <p className="text-sm uppercase tracking-[0.45em] text-[#e2b1a6]">Compromisso Adoração</p>
+            <p className="text-sm uppercase tracking-[0.45em] text-[#e2b1a6]">Sinopse · Nataleluia 2026</p>
             <h1 className="font-hero mt-4 text-[clamp(1.75rem,5vw,3rem)] font-light tracking-[-0.04em] text-white">
-              Uma noite de adoração para <span className="font-bold">encontrar a presença de Deus</span>
+              <span className="font-bold">“A Maior História de Todas”</span>
             </h1>
-            <div className="mt-8 space-y-5 text-left text-[clamp(0.92rem,2.8vw,1rem)] leading-7 text-white/72 sm:text-center">
+            <div className="mt-8 space-y-5 text-left text-[clamp(0.92rem,2.8vw,1rem)] leading-7 text-white/72">
               <p>
-                O Compromisso Adoração 2026 convida a igreja e a comunidade para um encontro especial de louvor, oração e comunhão. Uma experiência que une música, palavra e reverência em um ambiente acolhedor e contemporâneo.
+                Para Marina, Natal é a pior festa do mundo! Afinal, fazer aniversário no dia 25 de dezembro significa para ela dividir seu grande dia com a maior celebração do ano. Nada, nem presentes incríveis nem festas maravilhosas fizeram ela gostar de Natal até hoje.
               </p>
               <p>
-                Mais do que um evento, é um momento para renovar o compromisso com Cristo, celebrar a fé em comunidade e viver a adoração como estilo de vida. Em breve, mais detalhes sobre data, programação e inscrições.
+                Mas nesse Natal tudo está para mudar. Sua avó decide levá-la a um lugar que Marina nunca conheceu: uma biblioteca! Mas esta, conta a vovó, “nunca fecha”, e lá os livros guardam muito mais do que palavras. Ali Marina, mesmo desconfiada e relutante, conhece o Bibliotecário e seus ajudantes, os verdadeiros guias na sua maravilhosa jornada em busca do melhor presente que ela poderia ganhar.
+              </p>
+              <p>
+                Entre livros e histórias, Marina acaba encontrando muito mais do que uma biblioteca. Ela encontra histórias que começam a mudar o que ela pensava sobre o Natal e sobre si mesma, para enfim, conhecer A Maior História de Todas. O encontro de Marina com o verdadeiro Natal está prestes a começar!
               </p>
             </div>
           </div>
