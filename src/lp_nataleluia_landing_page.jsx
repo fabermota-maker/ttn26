@@ -1554,7 +1554,7 @@ function CheckoutPage() {
 function N2026Footer() {
   return (
     <footer id="n2026-contato" className="n2026-footer lp-section lp-section-footer relative bg-transparent px-4 sm:px-8">
-      <div className="mx-auto max-w-6xl pt-10">
+      <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-center gap-8 text-center">
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             <div className="compromisso-adoracao-logo-wrap">
@@ -1612,7 +1612,7 @@ function N2026Footer() {
   );
 }
 
-function N2026Page() {
+function N2026Page({ setCurrentPage }) {
   const sectionRef = useRef(null);
   const cardRef = useRef(null);
   const [spotlight, setSpotlight] = useState({ x: 50, y: 42, active: false });
@@ -1689,7 +1689,7 @@ function N2026Page() {
       </div>
       <div className="n2026-spotlight" aria-hidden="true" />
 
-      <section id="n2026" className="relative z-10 px-4 pb-10 pt-28 sm:px-8">
+      <section id="n2026" className="relative z-10 px-4 pt-28 sm:px-8">
         <div className="mx-auto max-w-6xl" style={{ perspective: "1400px" }}>
           <div
             ref={cardRef}
@@ -1733,6 +1733,15 @@ function N2026Page() {
               <p>
                 Entre livros e histórias, Marina acaba encontrando muito mais do que uma biblioteca. Ela encontra histórias que começam a mudar o que ela pensava sobre o Natal e sobre si mesma, para enfim, conhecer A Maior História de Todas. O encontro de Marina com o verdadeiro Natal está prestes a começar!
               </p>
+            </div>
+            <div className="flex min-h-[clamp(150px,24vh,240px)] w-full items-center justify-center">
+              <button
+                type="button"
+                onClick={() => handlePageNav("checkout", { setCurrentPage })}
+                className="ticket-cta-pulse inline-flex scale-[1.2] items-center justify-center rounded-full border border-[#ff9f8f]/35 bg-[#d54b39] px-7 py-3 text-sm font-bold uppercase tracking-[0.04em] text-[#071426] transition hover:bg-[#e25745]"
+              >
+                Ingressos
+              </button>
             </div>
           </div>
         </div>
@@ -2766,7 +2775,7 @@ export default function NataleluiaLandingPage() {
         {currentPage === "checkout" ? (
           <CheckoutPage />
         ) : currentPage === "n2026" ? (
-          <N2026Page />
+          <N2026Page setCurrentPage={setCurrentPage} />
         ) : (
           <>
             <Hero setCurrentPage={setCurrentPage} />
