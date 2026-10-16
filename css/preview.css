@@ -8,6 +8,12 @@ body {
   margin: 0;
 }
 
+html:has(.lp-boot:not(.is-done)),
+body:has(.lp-boot:not(.is-done)) {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
 body.lp-preview-page {
   background: #071426;
 }
@@ -104,6 +110,32 @@ body.lp-landing-page {
   flex-direction: column;
   align-items: center;
   gap: 28px;
+}
+
+.lp-boot-curtain {
+  position: absolute;
+  top: -3%;
+  bottom: -6%;
+  width: min(23vw, 360px);
+  pointer-events: none;
+  background-image: url("../assets/images/loading-curtains.png");
+  background-size: auto 120%;
+  background-repeat: no-repeat;
+  filter: blur(7px);
+  opacity: .7;
+  mask-image: linear-gradient(to bottom, #000 0%, #000 76%, transparent 96%);
+}
+
+.lp-boot-curtain-left {
+  left: -12px;
+  background-position: left top;
+  mask-image: linear-gradient(to right, #000 45%, transparent 100%);
+}
+
+.lp-boot-curtain-right {
+  right: -12px;
+  background-position: right top;
+  mask-image: linear-gradient(to left, #000 45%, transparent 100%);
 }
 
 .lp-boot-logo {
