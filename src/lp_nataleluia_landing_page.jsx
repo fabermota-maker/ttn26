@@ -504,7 +504,7 @@ function Hero({ setCurrentPage }) {
             <strong>A história</strong> que nunca
           </span>
           <span className="block max-[479px]:whitespace-normal sm:whitespace-nowrap">
-            deixou de <strong>ser vivenciada</strong>
+            deixou de <strong>ser contada</strong>
           </span>
         </h1>
 
@@ -1510,7 +1510,7 @@ function CheckoutPage() {
               loading="eager"
               decoding="async"
             />
-            <p className="absolute bottom-0 left-0 p-5 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#f0ecb9]/88 sm:p-8">
+            <p className="absolute left-[76%] top-[76%] -translate-x-1/2 text-[clamp(8px,1.1vw,12px)] font-semibold uppercase tracking-[0.28em] text-[#f0ecb9]/88">
               <N2026BrandMark />
             </p>
           </div>
@@ -1542,7 +1542,6 @@ function CheckoutPage() {
             </div>
             <p className="checkout-message uppercase leading-snug text-[#ffe3d2]">
               <strong className="block font-bold">Esperamos você!</strong>
-              Seja abençoado por este grandioso evento, em nome de Jesus Cristo!
             </p>
           </div>
         </div>
@@ -1614,6 +1613,118 @@ function N2026Footer() {
 
 function N2026Page({ setCurrentPage }) {
   const sectionRef = useRef(null);
+  useEffect(() => {
+    const section = sectionRef.current;
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mouse = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const canvas = document.createElement("canvas");
+    canvas.setAttribute("aria-hidden", "true");
+    canvas.style.cssText = "position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60;";
+    const context = canvas.getContext("2d");
+    if (!section || !context) return;
+    let particles = [];
+    let frame = 0;
+    let lastEmission = -Infinity;
+    let serial = 0;
+    let lastX = null;
+    let lastY = null;
+    let width = 0;
+    let height = 0;
+    const clear = () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      particles = [];
+      lastX = lastY = null;
+      context.clearRect(0, 0, width, height);
+    };
+    const resize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    const draw = (now) => {
+      context.clearRect(0, 0, width, height);
+      particles = particles.filter((particle) => now - particle.born < particle.life);
+      particles.forEach((particle) => {
+        const age = now - particle.born;
+        const progress = age / particle.life;
+        const seconds = age / 1000;
+        const x = particle.x + particle.vx * seconds + Math.sin(seconds * 3 + particle.phase) * 2;
+        const y = particle.y + particle.vy * seconds;
+        context.globalAlpha = Math.min(1, progress * 12) * (1 - progress) * .65;
+        context.fillStyle = particle.color;
+        context.shadowColor = particle.color;
+        context.shadowBlur = 5;
+        context.beginPath();
+        if (particle.star) {
+          const size = particle.size * 2.4;
+          for (let point = 0; point < 8; point += 1) {
+            const angle = point * Math.PI / 4 + particle.phase;
+            const radius = point % 2 ? size * .22 : size;
+            const px = x + Math.cos(angle) * radius;
+            const py = y + Math.sin(angle) * radius;
+            if (point === 0) context.moveTo(px, py);
+            else context.lineTo(px, py);
+          }
+          context.closePath();
+        } else context.arc(x, y, particle.size, 0, Math.PI * 2);
+        context.fill();
+      });
+      context.globalAlpha = 1;
+      frame = particles.length ? requestAnimationFrame(draw) : 0;
+    };
+    const move = (event) => {
+      if (event.pointerType !== "mouse" || motion.matches || !mouse.matches || document.hidden) return;
+      const distance = lastX === null ? Infinity : Math.hypot(event.clientX - lastX, event.clientY - lastY);
+      const now = performance.now();
+      if (now - lastEmission < 55 || distance < 3) return;
+      lastEmission = now;
+      lastX = event.clientX;
+      lastY = event.clientY;
+      serial += 1;
+      if (particles.length >= 20) particles.shift();
+      particles.push({
+        x: event.clientX + (Math.random() - .5) * 8,
+        y: event.clientY + (Math.random() - .5) * 8,
+        vx: (Math.random() - .5) * 18,
+        vy: -8 - Math.random() * 16,
+        size: .7 + Math.random() * .9,
+        phase: Math.random() * Math.PI * 2,
+        color: serial % 2 ? "#f5d18b" : "#fff2d7",
+        star: serial % 5 === 0,
+        born: now,
+        life: 600 + Math.random() * 600,
+      });
+      if (!frame) frame = requestAnimationFrame(draw);
+    };
+    const configure = () => {
+      clear();
+      if (!motion.matches && mouse.matches) {
+        document.body.appendChild(canvas);
+        resize();
+      } else canvas.remove();
+    };
+    configure();
+    section.addEventListener("pointermove", move, { passive: true });
+    window.addEventListener("resize", resize, { passive: true });
+    window.addEventListener("scroll", clear, { passive: true });
+    document.addEventListener("visibilitychange", clear);
+    motion.addEventListener("change", configure);
+    mouse.addEventListener("change", configure);
+    return () => {
+      clear();
+      canvas.remove();
+      section.removeEventListener("pointermove", move);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("scroll", clear);
+      document.removeEventListener("visibilitychange", clear);
+      motion.removeEventListener("change", configure);
+      mouse.removeEventListener("change", configure);
+    };
+  }, []);
   const cardRef = useRef(null);
   const [spotlight, setSpotlight] = useState({ x: 50, y: 42, active: false });
   const [cardTilt, setCardTilt] = useState({
@@ -1711,8 +1822,8 @@ function N2026Page({ setCurrentPage }) {
               loading="eager"
               decoding="async"
             />
-            <div className="absolute bottom-0 left-0 z-[2] p-5 sm:p-8">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#f0ecb9]/88">
+            <div className="absolute left-[76%] top-[76%] z-[2] -translate-x-1/2">
+              <p className="text-[clamp(8px,1.1vw,12px)] font-semibold uppercase tracking-[0.28em] text-[#f0ecb9]/88">
                 <N2026BrandMark />
               </p>
             </div>
