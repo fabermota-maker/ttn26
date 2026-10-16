@@ -26,12 +26,12 @@ const COMPROMISSO_ADORACAO_INSTAGRAM_URL = "https://www.instagram.com/compromiss
 const COMPROMISSO_ADORACAO_ADDRESS = "Rua Bento Viana, 1.200";
 const COMPROMISSO_ADORACAO_MAPS_URL =
   "https://www.google.com/maps?cid=3873654248599174438&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAMYASAF&hl=pt-BR&gl=BR&source=embed";
-const N2026_BRAND_LABEL = "N2✶26";
+const N2026_BRAND_LABEL = "2026";
 
 function N2026BrandMark({ className = "" }) {
   return (
     <span className={className}>
-      N2<span className="text-[#f0ecb9]">✶</span>26
+      2026
     </span>
   );
 }
@@ -151,7 +151,7 @@ const cards = [
     icon: "access",
     image: "./assets/images/exp-acessibilidade.png?v=2",
     imageFit: "contain",
-    body: "Ambiente planejado: teremos libras, audiodescrição e espaço calmo.",
+    body: "Ambiente planejado: temos libras, audiodescrição e espaço calmo.",
   },
 ];
 
@@ -399,7 +399,7 @@ function Header({ blur, bgOpacity, open, setOpen, currentPage, setCurrentPage })
                 <button
                   type="button"
                   onClick={() => handlePageNav("checkout", { setOpen, setCurrentPage })}
-                  className="ml-0.5 inline-flex h-7 shrink-0 items-center justify-center whitespace-nowrap rounded-full border border-[#ff9f8f]/35 bg-[#d54b39] px-2 text-[8.5px] font-bold uppercase leading-none tracking-[0.02em] text-[#071426] shadow-[0_4px_18px_rgba(213,75,57,.35)] transition hover:bg-[#e25745] lg:px-2.5 lg:text-[9px]"
+                  className="ticket-cta-pulse ml-0.5 inline-flex h-7 shrink-0 items-center justify-center whitespace-nowrap rounded-full border border-[#ff9f8f]/35 bg-[#d54b39] px-2 text-[8.5px] font-bold uppercase leading-none tracking-[0.02em] text-[#071426] shadow-[0_4px_18px_rgba(213,75,57,.35)] transition hover:bg-[#e25745] lg:px-2.5 lg:text-[9px]"
                 >
                   Meu ingresso
                 </button>
@@ -455,6 +455,13 @@ function Header({ blur, bgOpacity, open, setOpen, currentPage, setCurrentPage })
               className="flex w-full flex-col items-center rounded-[1.85rem] bg-[#2c1010]/92 px-5 py-7 shadow-[0_24px_70px_rgba(0,0,0,.4)]"
               aria-label="Menu mobile"
             >
+              <button
+                type="button"
+                onClick={() => handlePageNav("checkout", { setOpen, setCurrentPage })}
+                className="ticket-cta-pulse mb-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-[#d54b39] px-5 text-[15px] font-bold uppercase tracking-[0.04em] text-[#071426] shadow-[0_8px_24px_rgba(213,75,57,.35)]"
+              >
+                MEU INGRESSO
+              </button>
               {navItems.map((item) =>
                 renderNavItem(item, {
                   setOpen,
@@ -463,13 +470,6 @@ function Header({ blur, bgOpacity, open, setOpen, currentPage, setCurrentPage })
                   className: mobileNavClass,
                 })
               )}
-              <button
-                type="button"
-                onClick={() => handlePageNav("checkout", { setOpen, setCurrentPage })}
-                className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-[#d54b39] px-5 text-[15px] font-bold uppercase tracking-[0.04em] text-[#071426] shadow-[0_8px_24px_rgba(213,75,57,.35)]"
-              >
-                MEU INGRESSO
-              </button>
             </nav>
             <button
               type="button"
@@ -495,7 +495,7 @@ function Header({ blur, bgOpacity, open, setOpen, currentPage, setCurrentPage })
   );
 }
 
-function Hero() {
+function Hero({ setCurrentPage }) {
   return (
     <section id="top" className="lp-hero relative flex min-h-screen items-center justify-center overflow-hidden px-4 pb-20 pt-32 sm:px-5">
       <div className="relative z-10 mx-auto w-full max-w-6xl text-center fade-in-up">
@@ -536,6 +536,15 @@ function Hero() {
               Primeira Igreja Batista de Curitiba
             </span>
           </div>
+          <div className="flex min-h-[clamp(150px,24vh,240px)] w-full items-center justify-center">
+          <button
+            type="button"
+            onClick={() => handlePageNav("checkout", { setCurrentPage })}
+            className="ticket-cta-pulse inline-flex scale-[1.2] items-center justify-center rounded-full border border-[#ff9f8f]/35 bg-[#d54b39] px-7 py-3 text-sm font-bold uppercase tracking-[0.04em] text-[#071426] transition hover:bg-[#e25745]"
+          >
+            Ingressos
+          </button>
+          </div>
         </div>
       </div>
     </section>
@@ -546,16 +555,16 @@ function EventSection() {
   return (
     <section id="evento" className="lp-section relative bg-transparent px-4 sm:px-8">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div className="mb-12 text-center">
           <div>
             <p className="text-sm uppercase tracking-[0.45em] text-[#e2b1a6]">O Evento</p>
-            <h2 className="font-hero mt-4 max-w-2xl text-[clamp(1.7rem,5vw,3.75rem)] font-light tracking-[-0.04em] text-white">
-              Uma história que transforma vidas ontem, hoje e para sempre.
+            <h2 className="font-hero mx-auto mt-4 max-w-6xl text-[clamp(1.7rem,5vw,3.75rem)] font-light tracking-[-0.04em] text-white">
+              Um espetáculo que apresenta o <strong className="font-bold">verdadeiro</strong> sentido do <span className="whitespace-nowrap">Natal: <strong className="font-bold">Jesus.</strong></span>
             </h2>
+            <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-white/62">
+              Fé, arte e tecnologia em uma apresentação de Natal inesquecível e memorável.
+            </p>
           </div>
-          <p className="max-w-md text-base leading-7 text-white/62">
-            Fé, arte e tecnologia em uma apresentação de Natal inesquecível e memorável.
-          </p>
         </div>
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -630,16 +639,24 @@ function ExperienceSection() {
             />
             <div className="absolute bottom-0 right-0 h-full w-full bg-gradient-to-t from-[#411010] via-[#411010]/35 to-transparent" />
           </div>
-
-          <div className="flex justify-center">
+          <div className="flex items-center justify-center gap-5">
             <img
-              src={COMPROMISSO_ADORACAO_LOGO_URL}
-              alt="Compromisso Adoração"
-              className="compromisso-adoracao-logo h-auto w-[165px] object-contain opacity-95"
+              src={PIB_CURITIBA_LOGO_URL}
+              alt="Primeira Igreja Batista de Curitiba"
+              className="h-auto w-[min(140px,32vw)] object-contain opacity-95"
+              loading="lazy"
+              decoding="async"
+            />
+            <span className="text-3xl font-light text-white/45" aria-hidden="true">|</span>
+            <img
+              src={LOGO_URL}
+              alt="Nataleluia"
+              className="h-auto w-[min(140px,32vw)] object-contain opacity-95"
               loading="lazy"
               decoding="async"
             />
           </div>
+
         </div>
 
         <div className="lg:pl-6">
@@ -649,19 +666,16 @@ function ExperienceSection() {
           </h2>
           <div className="mt-8 space-y-5 text-[14px] leading-7 text-white/72">
             <p>
-              O Nataleluia é um espetáculo natalino realizado pela Primeira Igreja Batista de Curitiba, há mais de 20 anos, com o objetivo de celebrar o nascimento de Jesus Cristo, o filho de Deus. Unindo fé, arte e tecnologia promove a reflexão sobre a verdade, o amor, a paz e a salvação que apenas Jesus nos oferece.
+              O Nataleluia é um espetáculo natalino realizado há mais de 20 anos pela Primeira Igreja Batista de Curitiba, com o objetivo de celebrar o nascimento de Jesus Cristo, o Filho de Deus. Unindo fé, arte e tecnologia, o espetáculo promove a reflexão sobre a verdade, o amor, a paz e a salvação que apenas Jesus nos oferece.
             </p>
             <p>
-              Durante todos esses anos, esta história é apresentada de forma contemporânea e com diferentes temáticas, pensado e desenvolvido para todas as idades. Com mais de 800 voluntários, o Nataleluia envolve diversas áreas artísticas, como teatro, música, dança, coral, e recursos tecnológicos modernos.
+              Durante todos esses anos, esta história é apresentada de forma contemporânea e com diferentes temáticas, pensada e desenvolvida para todas as idades. Com mais de 1.300 voluntários, o Nataleluia envolve diversas áreas artísticas, como teatro, música, dança, coral e recursos tecnológicos modernos.
             </p>
             <p>
-              O valor levantado com os ingressos do Nataleluia é destinado para projetos da ABASC (Associação Batista de Ação Social de Curitiba), que auxilia famílias em situação de vulnerabilidade.
+              Por meio do Nataleluia, nosso propósito é fazer Jesus conhecido! Deus enviou o seu Filho unigênito para que cada um de nós pudesse ter uma vida em abundância, e desejamos que todos conheçam esse Amor!
             </p>
             <p>
-              Por meio do Nataleluia, nosso propósito é fazer Jesus conhecido! Deus enviou o seu filho unigênito para que cada um de nós pudesse ter uma vida em abundância e desejamos que todos conheçam esse Amor!
-            </p>
-            <p>
-              Por isso, você é nosso convidado especial para fazer parte desse grande espetáculo, que vai além de uma apresentação de Natal, é uma mensagem viva sobre Aquele que era, é e sempre há de ser, o Salvador e Rei dos reis, Jesus!
+              Por isso, você é nosso convidado especial para fazer parte desse grande espetáculo, que vai além de uma apresentação de Natal: é uma mensagem viva sobre Aquele que era, é e sempre há de ser — o Salvador e Rei dos reis, Jesus!
             </p>
           </div>
         </div>
@@ -672,7 +686,7 @@ function ExperienceSection() {
 
 function TimelineSection() {
   const timelineCards = [
-    { year: "2025", title: "Um Natal de Liberdade", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl4Cwb5gnKMTciQNiDEmukHjZMSScqBGJZrA&s", bgImage: TIMELINE_SELECTED_BG_URL, albumUrl: "https://www.flickr.com/search/?text=nataleluia+2025", description: "Com o tema “Um Natal de Liberdade”, o Nataleluia 2025 apresentou uma história emocionante inspirada em fatos reais. Mais de 1.000 voluntários deram vida à trajetória de homens e mulheres de diferentes origens, unidos pela fé e pelo desejo de celebrar o verdadeiro Natal.\nA história revelou o nascimento de uma comunidade marcada pela comunhão, pelo acolhimento e pelo amor, mesmo quando seguir esse caminho exigia renúncia. Em cinco noites de apresentações, mais de 17 mil pessoas acompanharam um espetáculo que reuniu músicas originais, teatro, dança, tecnologia, performances circenses, orquestra e coral." },
+    { year: "2025", title: "Um Natal de Liberdade", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl4Cwb5gnKMTciQNiDEmukHjZMSScqBGJZrA&s", bgImage: TIMELINE_SELECTED_BG_URL, albumUrl: "https://www.flickr.com/search/?text=nataleluia+2025", description: "Com o tema “Um Natal de Liberdade”, o Nataleluia 2025 apresentou uma história emocionante inspirada em fatos reais. Mais de 1.300 voluntários deram vida à trajetória de homens e mulheres de diferentes origens, unidos pela fé e pelo desejo de celebrar o verdadeiro Natal.\nA história revelou o nascimento de uma comunidade marcada pela comunhão, pelo acolhimento e pelo amor, mesmo quando seguir esse caminho exigia renúncia. Em cinco noites de apresentações, mais de 17 mil pessoas acompanharam um espetáculo que reuniu músicas originais, teatro, dança, tecnologia, performances circenses, orquestra e coral." },
     { year: "2024", title: "MABBAT – A Esperança", image: "https://image.isu.pub/241219004722-2cc008095b93962823667c3f8261f49a/jpg/page_1_thumb_large.jpg", bgImage: "https://wsrv.nl/?url=live.staticflickr.com/65535/54220544032_f6a152ea6c_b.jpg&output=jpg", albumUrl: "https://www.flickr.com/search/?text=nataleluia+2024", description: "“MABBAT – A Esperança” contou a história do nascimento de Jesus sob a perspectiva de Isabel e Zacarias. foram 5 noites de apresentações com quase 400 artistas no palco e mais de 600 voluntários no backstage.\nA produção foi 100% autoral. Uma equipe de 10 roteiristas e 6 produtores musicais trabalhou por meses até chegar ao roteiro final, um entrelaçamento da história de Isabel e Zacarias com a de Maria. O casal, que não podia ter filhos, por conta da idade avançada e da esterilidade de Isabel, recebe uma revelação do anjo Gabriel de que daria à luz a um profeta: João Batista, que prepararia o caminho para o Messias. Maria também recebe a notícia, do mesmo anjo, de que seria mãe, e justamente do Filho do Altíssimo. Então nasce Jesus." },
     { year: "2023", title: "O Senhor do Tempo", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNPP0M-LIV1mOVJ-Qraj61mBkaXC8iTNliVw&s", bgImage: "https://media.gazetadopovo.com.br/2023/12/21115544/Imagem-do-WhatsApp-de-2023-12-21-%C3%A0s-09.18.40_4225f0b2.jpg.webp", albumUrl: "https://www.flickr.com/search/?text=nataleluia+2023", description: "Em “O Senhor do Tempo”, o público conheceu a história de Seu Francisco, um relojoeiro cansado da vida que é levado a revisitar suas memórias e experiências mais profundas.\nEm uma viagem pelo tempo, sonhos e lembranças, o espetáculo apresentou histórias de pessoas que encontraram esperança n’Aquele que transforma vidas, deixando marcas que permanecem para sempre.\nA edição contou com arranjos e canções originais do Clube de Composição da PIB Curitiba e colaborações de Stênio Marcius." },
     {
@@ -1327,6 +1341,127 @@ function SponsorsBanner() {
 }
 
 function CheckoutPage() {
+  useEffect(() => {
+    // Adapt the documented Card Spread spring/hover behavior to the existing links.
+    const row = document.querySelector("#ingresso .checkout-tickets");
+    if (!row) return;
+    const tickets = Array.from(row.children);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const originals = tickets.map((ticket) => ticket.getAttribute("style"));
+    const states = tickets.map(() => ({ value: [0, 0, 0], speed: [0, 0, 0], target: [0, 0, 0] }));
+    let frame = 0;
+    let entranceDone = reducedMotion.matches;
+    let entranceStarted = false;
+    let entranceAnimations = [];
+    let entranceObserver;
+    let previous = 0;
+    let pointerIndex = -1;
+    let focusIndex = -1;
+    const tick = (now) => {
+      const dt = Math.min((now - (previous || now - 16)) / 1000, 0.032);
+      previous = now;
+      let moving = false;
+      states.forEach((state, index) => {
+        for (let axis = 0; axis < 3; axis += 1) {
+          state.speed[axis] += (150 * (state.target[axis] - state.value[axis]) - 16 * state.speed[axis]) * dt;
+          state.value[axis] += state.speed[axis] * dt;
+          if (Math.abs(state.target[axis] - state.value[axis]) > 0.01 || Math.abs(state.speed[axis]) > 0.01) moving = true;
+          else { state.value[axis] = state.target[axis]; state.speed[axis] = 0; }
+        }
+        const [x, y, angle] = state.value;
+        tickets[index].style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${angle}deg)`;
+      });
+      frame = moving ? requestAnimationFrame(tick) : 0;
+      if (!moving) previous = 0;
+    };
+    const update = () => {
+      if (!entranceDone) return;
+      const active = focusIndex >= 0 ? focusIndex : pointerIndex;
+      const width = tickets[0].offsetWidth;
+      const strength = Math.min(1, width / 96);
+      states.forEach((state, index) => {
+        const distance = index - active;
+        const reach = Math.max(0, 1 - Math.abs(distance) / 4);
+        const direction = Math.sign(distance);
+        // Keep the original resting layout; spread neighbours only during interaction.
+        state.target = active < 0 || reducedMotion.matches ? [0, 0, 0] : index === active
+          ? [0, -26 * strength, 0]
+          : [direction * 9 * reach * strength, -4 * reach * strength, direction * 3.6 * reach];
+      });
+      if (!frame) frame = requestAnimationFrame(tick);
+    };
+    const listeners = [];
+    const listen = (node, name, handler) => {
+      node.addEventListener(name, handler);
+      listeners.push(() => node.removeEventListener(name, handler));
+    };
+    tickets.forEach((ticket, index) => {
+      ticket.style.transitionProperty = "none";
+      ticket.style.transformOrigin = "50% 100%";
+      listen(ticket, "pointerenter", (event) => { if (event.pointerType !== "touch") { pointerIndex = index; update(); } });
+      listen(ticket, "focus", () => { focusIndex = index; update(); });
+      listen(ticket, "blur", () => { focusIndex = -1; update(); });
+    });
+    listen(row, "pointerleave", () => { pointerIndex = -1; update(); });
+    listen(window, "resize", update);
+    listen(reducedMotion, "change", update);
+    // Animate only transforms on the existing tickets; their layout boxes never move.
+    if (!reducedMotion.matches) {
+      const middle = Math.floor(tickets.length / 2);
+      const prepareEntrance = () => {
+        entranceAnimations.forEach((animation) => animation.cancel());
+        const center = tickets[middle].offsetLeft + tickets[middle].offsetWidth / 2;
+        entranceAnimations = tickets.map((ticket, index) => {
+          const offset = center - (ticket.offsetLeft + ticket.offsetWidth / 2);
+          const distance = Math.abs(index - middle);
+          ticket.style.zIndex = String(tickets.length - distance);
+          const delay = distance * 100;
+          const tilt = index === middle ? 0 : (index % 2 === 0 ? -1 : 1) * (distance === 1 ? 3 : 5);
+          const animation = ticket.animate([
+            { transform: `translateX(${offset}px) rotate(${tilt * 0.6}deg)`, offset: 0 },
+            { transform: `translateX(${offset * 0.45}px) rotate(${tilt}deg)`, offset: 0.5 },
+            { transform: "translateX(0px) rotate(0deg)", offset: 1 },
+          ], { duration: 1200 - delay, delay, easing: "ease-in-out", fill: "both" });
+          animation.pause();
+          animation.currentTime = 0;
+          return animation;
+        });
+      };
+      prepareEntrance();
+      entranceObserver = new IntersectionObserver((entries) => {
+        if (entranceStarted || !entries.some((entry) => entry.isIntersecting)) return;
+        entranceStarted = true;
+        entranceObserver.disconnect();
+        entranceAnimations.forEach((animation) => animation.play());
+        Promise.all(entranceAnimations.map((animation) => animation.finished)).then(() => {
+          entranceAnimations.forEach((animation) => animation.cancel());
+          tickets.forEach((ticket) => ticket.style.removeProperty("z-index"));
+          entranceDone = true;
+        }).catch(() => {});
+      }, { threshold: 0.25 });
+      entranceObserver.observe(row);
+      listen(window, "resize", () => {
+        if (!entranceStarted) prepareEntrance();
+      });
+      listen(reducedMotion, "change", () => {
+        if (!reducedMotion.matches) return;
+        entranceObserver.disconnect();
+        entranceAnimations.forEach((animation) => animation.cancel());
+        tickets.forEach((ticket) => ticket.style.removeProperty("z-index"));
+        entranceDone = true;
+      });
+    }
+    return () => {
+      entranceObserver?.disconnect();
+      entranceAnimations.forEach((animation) => animation.cancel());
+      cancelAnimationFrame(frame);
+      listeners.forEach((remove) => remove());
+      tickets.forEach((ticket, index) => {
+        if (originals[index] === null) ticket.removeAttribute("style");
+        else ticket.setAttribute("style", originals[index]);
+      });
+    };
+  }, []);
   const presentationDates = [
     { day: '18', url: 'https://www.diskingressos.com.br/event/4194' },
     { day: '19', url: 'https://www.diskingressos.com.br/event/4199' },
@@ -1336,66 +1471,79 @@ function CheckoutPage() {
   ];
 
   return (
-    <section id="ingresso" className="relative min-h-screen bg-[#411010] px-4 pb-10 pt-28 sm:px-6">
+    <section id="ingresso" className="checkout-fit relative bg-[#411010] px-4">
+      <style>{`
+        .checkout-fit { height: 100dvh; padding-top: min(142px, 22dvh); padding-bottom: 12px; box-sizing: border-box; }
+        .checkout-fit > .checkout-content { height: 100%; min-height: 0; }
+        .checkout-layout { height: 100%; display: grid; grid-template-rows: minmax(0, max-content) auto; align-content: center; gap: 20px; }
+        .checkout-banner { min-height: 0; width: auto; max-width: 100%; height: 100%; max-height: min(36.752vw, 364.6px); aspect-ratio: 1170 / 430; justify-self: center; align-self: start; }
+        .checkout-banner > img { height: 100%; width: 100%; object-fit: contain; object-position: center; }
+        .checkout-dates h2 { margin: 0 0 20px; line-height: 1.4; font-size: clamp(10px, 1.5vw, 16px); }
+        .checkout-tickets { display: flex; flex-wrap: nowrap; justify-content: space-between; gap: 8px; padding: 0 3%; }
+        .checkout-tickets > a { width: min(96px, 15vw, 23dvh); flex-shrink: 0; }
+        .checkout-ticket-copy { container-type: inline-size; }
+        .checkout-ticket-copy > span { font-size: clamp(8px, 2vw, 11px); }
+        .checkout-ticket-copy > span:nth-child(2) { font-size: clamp(26px, 7vw, 52px); }
+        .checkout-message { margin-top: clamp(10px, 3dvh, 32px); font-size: clamp(9px, 1.5vw, 16px); }
+        @media (max-width: 639px) {
+          .checkout-layout { grid-template-rows: auto auto; align-content: center; gap: 20px; }
+          .checkout-banner { width: 100%; height: auto; max-height: none; }
+          .checkout-tickets { justify-content: center; padding-inline: 0; gap: clamp(6px, 2vw, 12px); }
+        }
+        @media (max-height: 500px) {
+          .checkout-fit { padding-top: 105px; padding-bottom: 6px; }
+          .checkout-layout { gap: 4px; }
+          .checkout-tickets > a { width: min(56px, 12vw, 19dvh); }
+          .checkout-ticket-copy > span:nth-child(2) { font-size: 26px; }
+          .checkout-dates h2 { margin-bottom: 4px; }
+          .checkout-message { margin-top: 5px; font-size: 9px; }
+        }
+      `}</style>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_16%,rgba(185,67,50,.20),transparent_30%),linear-gradient(180deg,rgba(65,16,16,.74),#411010_72%)]" />
-      <div className="relative z-10 mx-auto max-w-6xl">
-        <div className="grid gap-4">
-          <div className="h-auto min-w-0 rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-5 backdrop-blur-xl sm:p-6">
-            <h2 className="mb-3 text-[15px] font-medium text-white">Escolha as datas da apresentação</h2>
-            <div className="mb-6 grid grid-cols-2 gap-x-3 gap-y-6 overflow-visible px-1 py-2 sm:grid-cols-3 sm:gap-x-4 sm:px-2 lg:grid-cols-5">
-              {presentationDates.map((date, index) => {
-                const isSelected = false;
-
-                return (
-                  <div key={date.day} className="flex w-full max-w-[124px] flex-col items-center justify-self-center overflow-visible">
-                    <a
-                      href={date.url}
-                      className="group relative aspect-[118/154] h-auto w-full max-w-[118px] text-left transition hover:-translate-y-1"
-                      aria-label={`Comprar ingresso para ${date.day} de dezembro`}
-                    >
-                      <svg
-                        viewBox="0 0 192 272"
-                        preserveAspectRatio="none"
-                        className="absolute inset-0 h-full w-full drop-shadow-[0_18px_40px_rgba(0,0,0,.28)]"
-                        aria-hidden="true"
-                      >
-                        <defs>
-                          <linearGradient id={`checkout-ticket-bg-${index}`} x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="rgba(255,255,255,0)" />
-                            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-                          </linearGradient>
-                        </defs>
-                        <path
-                          d={CHECKOUT_TICKET_PATH}
-                          fill="rgba(255,255,255,0)"
-                          stroke={isSelected ? "#d54b39" : "rgba(255,255,255,.24)"}
-                          strokeWidth={isSelected ? "3" : "1.6"}
-                        />
-                        <path d="M18 18H174V254H18Z" fill="none" stroke={isSelected ? "rgba(213,75,57,.65)" : "rgba(255,255,255,.16)"} strokeWidth="1" />
-                        <path d="M26 18V254" fill="none" stroke={isSelected ? "rgba(213,75,57,.48)" : "rgba(255,255,255,.14)"} strokeWidth="1" strokeDasharray="3 4" />
-                      </svg>
-
-                      <div className="absolute inset-0 flex flex-col items-center justify-between px-3 py-4">
-                        <div className="w-full text-center">
-                          <span className="block text-[9px] font-semibold uppercase tracking-[0.18em] text-white/58">Dez</span>
-                          <span className={`mt-1 block text-[30px] font-light leading-none tracking-[-0.05em] ${isSelected ? "text-[#f0ecb9]" : "text-white/82"}`}>
-                            {date.day}
-                          </span>
-                        </div>
-
-                        <div className="w-full">
-                          <span className={`mx-auto inline-flex w-full items-center justify-center rounded-full border px-2 py-1.5 text-[8px] font-semibold uppercase tracking-[0.12em] ${isSelected ? "border-[#d54b39] bg-[#d54b39]/18 text-white" : "border-white/10 bg-white/5 text-white/56"}`}>
-                            Ingressos
-                          </span>
-                        </div>
-                      </div>
-                    </a>
-
+      <div className="checkout-content relative z-10 mx-auto w-full max-w-[62rem]">
+        <div className="checkout-layout">
+          <div className="checkout-banner relative overflow-hidden rounded-[clamp(1.25rem,4vw,2rem)] border border-white/10">
+            <img
+              src="./assets/images/nataleluia-2026-banner.png"
+              alt="Nataleluia 2026 — A Maior História de Todas"
+              className="block h-auto w-full"
+              loading="eager"
+              decoding="async"
+            />
+            <p className="absolute bottom-0 left-0 p-5 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#f0ecb9]/88 sm:p-8">
+              <N2026BrandMark />
+            </p>
+          </div>
+          <div className="checkout-dates min-w-0 text-center">
+            <h2 className="mb-5 text-[clamp(12px,1.5vw,16px)] font-medium uppercase text-[#ffe3d2]">Escolha as datas da apresentação:</h2>
+            <div className="checkout-tickets">
+              {presentationDates.map((date) => (
+                <a
+                  key={date.day}
+                  href={date.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Comprar ingresso para ${date.day} de dezembro`}
+                  className="group relative block aspect-[100/190] w-[88px] text-[#50120e] transition duration-200 hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffe3d2] sm:w-[96px]"
+                >
+                  <svg viewBox="0 0 100 190" className="absolute inset-0 h-full w-full drop-shadow-lg" aria-hidden="true">
+                    <path d="M12 0H88Q88 12 100 12V178Q88 178 88 190H12Q12 178 0 178V12Q12 12 12 0Z" fill="#ffe3d2" />
+                    <path d="M10 18H90V140H10Z" fill="none" stroke="#65251d" strokeWidth="3" />
+                    <path d="M0 153H100" stroke="#65251d" strokeWidth="2" strokeDasharray="5 3" />
+                  </svg>
+                  <div className="checkout-ticket-copy absolute inset-x-[13%] top-[12%] flex h-[60%] flex-col items-center justify-between font-serif">
+                    <span className="text-[11px] uppercase">Dia</span>
+                    <span className="text-[52px] leading-none tracking-[-0.06em]">{date.day}</span>
+                    <span className="text-[11px] uppercase">Dez</span>
                   </div>
-                );
-              })}
+                  <img src="./assets/nataleluia-monogram-n.svg" alt="" className="absolute bottom-[3%] left-1/2 h-[13%] w-[28%] -translate-x-1/2 object-contain" />
+                </a>
+              ))}
             </div>
-
+            <p className="checkout-message uppercase leading-snug text-[#ffe3d2]">
+              <strong className="block font-bold">Esperamos você!</strong>
+              Seja abençoado por este grandioso evento, em nome de Jesus Cristo!
+            </p>
           </div>
         </div>
       </div>
@@ -1563,15 +1711,6 @@ function N2026Page() {
               loading="eager"
               decoding="async"
             />
-            <div className="absolute right-0 top-0 z-[2] p-3 sm:p-5">
-              <img
-                src={COMPROMISSO_ADORACAO_LOGO_URL}
-                alt="Compromisso Adoração"
-                className="compromisso-adoracao-logo h-auto w-[clamp(80px,18vw,180px)] object-contain"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
             <div className="absolute bottom-0 left-0 z-[2] p-5 sm:p-8">
               <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#f0ecb9]/88">
                 <N2026BrandMark />
@@ -1610,17 +1749,7 @@ function Footer() {
   return (
     <footer id="contato" className="lp-section lp-section-footer relative bg-transparent px-4 sm:px-8">
       <div className="mx-auto max-w-6xl border-t border-white/10 pt-10">
-        <div>
-          <p className="text-sm uppercase tracking-[0.45em] text-[#e2b1a6]">Esperamos você</p>
-          <h2 className="font-hero mt-4 text-[clamp(1.5rem,5vw,2rem)] font-light tracking-[-0.04em] text-white">
-            Nataleluia
-          </h2>
-          <p className="mt-5 max-w-xl text-sm leading-7 text-white/58">
-            Mais de 20 anos inspirando a história que nunca deixou de ser vivenciada
-          </p>
-        </div>
-
-        <div className="mt-10 w-full rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-4 text-sm leading-6 text-white/66 opacity-80 backdrop-blur-md sm:p-5">
+        <div className="w-full rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-4 text-sm leading-6 text-white/66 opacity-80 backdrop-blur-md sm:p-5">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-[0.32em] text-[#e2b1a6]">Contato</p>
@@ -1641,6 +1770,16 @@ function Footer() {
               </a>
               <a
                 className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70"
+                href="https://www.facebook.com/compromissoadoracao/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook do Compromisso Adoração"
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 22v-9h3l.5-4H14V7c0-1.2.4-2 2-2h2V1.4A25 25 0 0 0 15 1c-3 0-5 1.8-5 5v3H7v4h3v9z" /></svg>
+                Facebook
+              </a>
+              <a
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70"
                 href={COMPROMISSO_ADORACAO_MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1654,6 +1793,9 @@ function Footer() {
 
         <div className="mt-12 flex min-w-0 flex-col justify-between gap-4 border-t border-white/10 pt-7 text-[clamp(0.65rem,2.4vw,0.75rem)] uppercase tracking-[0.16em] text-white/38 sm:flex-row sm:tracking-[0.22em]">
           <span className="min-w-0 break-words">PIB Curitiba | Nataleluia</span>
+          <span className="min-w-0 max-w-2xl break-words text-sm normal-case leading-6 tracking-normal sm:text-right">
+            Mais de 25 anos inspirando a história que nunca deixou de ser vivenciada. | Desde 1997
+          </span>
         </div>
       </div>
     </footer>
@@ -1705,6 +1847,14 @@ export default function NataleluiaLandingPage() {
   return (
     <main className="font-hero relative min-h-screen w-full max-w-[100%] overflow-x-hidden bg-[#411010] text-[#f4eee7] antialiased selection:bg-[#b94332] selection:text-white" data-preview-refresh="compromisso-adoracao-logo-checkout responsive-pass">
       <style>{`
+        @keyframes ticketCtaPulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(255, 146, 104, 0), 0 0 8px rgba(255, 112, 75, .2); }
+          50% { box-shadow: 0 0 0 5px rgba(255, 146, 104, .1), 0 0 22px rgba(255, 112, 75, .6); }
+        }
+        .ticket-cta-pulse { animation: ticketCtaPulse 2.8s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .ticket-cta-pulse { animation: none; }
+        }
         :root {
           --header-offset: 82px;
           --section-pad-y: clamp(4.2rem, 7.5vh, 5.5rem);
@@ -2619,14 +2769,14 @@ export default function NataleluiaLandingPage() {
           <N2026Page />
         ) : (
           <>
-            <Hero />
+            <Hero setCurrentPage={setCurrentPage} />
             <div className="content-gradient">
               <EventSection />
               <ExperienceSection />
               <TimelineSection />
               <FaqSection />
               <SponsorSection />
-              <SponsorsBanner />
+              {/* Carrossel de logos temporariamente oculto. Restaurar: <SponsorsBanner /> */}
               <Footer />
             </div>
           </>
