@@ -61,10 +61,34 @@ body.lp-landing-page {
   display: grid;
   place-items: center;
   padding: 24px;
+  overflow: hidden;
   background:
     radial-gradient(circle at top, rgba(185, 67, 50, 0.22), transparent 32%),
     #411010;
   transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+.lp-boot::before,
+.lp-boot::after {
+  content: "";
+  position: absolute;
+  top: -12%;
+  width: min(48vw, 720px);
+  height: 110%;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 222, 145, .68) 0%, rgba(245, 185, 88, .25) 17%, rgba(234, 154, 68, .10) 40%, transparent 68%);
+  filter: blur(18px);
+  transform-origin: 50% 0;
+}
+
+.lp-boot::before {
+  left: -20%;
+  transform: rotate(-28deg);
+}
+
+.lp-boot::after {
+  right: -20%;
+  transform: rotate(28deg);
 }
 
 .lp-boot.is-done {
@@ -74,6 +98,8 @@ body.lp-landing-page {
 }
 
 .lp-boot-inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
