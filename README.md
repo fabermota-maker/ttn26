@@ -74,6 +74,17 @@ Antes de publicar:
 
 ## Observações
 
+### Widget de acessibilidade
+
+- `src/AccessibilityWidget.jsx` contém o painel, preferências React, leitura via Web Speech API e tradução. `src/accessibility.css` isola os estilos do widget e os recursos visuais opcionais.
+- O botão ao lado de Meu ingresso abre um diálogo nativo com foco contido, Escape, X e fechamento ao clicar fora. Fechar não remove as preferências. Restaurar padrão também interrompe a leitura e restaura português.
+- Preferências são salvas em `nataleluia-accessibility-v1`; traduções são armazenadas em `nataleluia-translations-v1`. Falhas de armazenamento privado não impedem o uso.
+- Os rótulos do painel têm traduções locais revisadas em português, inglês, alemão, espanhol, italiano e japonês. O conteúdo da LP é traduzido pelo serviço público MyMemory, sem chave ou credenciais, mantendo os nós de texto, links e eventos React. Novos textos da timeline e páginas internas também são detectados.
+- A tradução automática envia somente os textos da página ao MyMemory, depende da internet e da cota diária do serviço. Valores digitados em formulários não são enviados. Ao falhar, o painel informa o erro e preserva o conteúdo disponível; português sempre pode ser restaurado. Imagens contendo texto não são traduzidas.
+- Vozes e qualidade de pausa/retomada dependem do navegador e do sistema operacional. A leitura usa o idioma selecionado, prioriza pt-BR e exclui menus, rodapé, controles, diálogos e conteúdo oculto. Trocar rota, voz, idioma ou velocidade interrompe a leitura atual.
+- A inversão preserva imagens e vídeos HTML com um filtro inverso; imagens aplicadas por CSS podem também ser invertidas. Alto contraste prevalece sobre o modo escuro quando ambos estão ativos.
+- O build preserva o carregador Babel usado na prévia, seus componentes JSX e os assets locais. `npm run build` gera `dist/`; não existem scripts de lint ou TypeScript neste projeto.
+
 - Caminhos de assets locais usam `./assets/images/` e `./assets/icons/`.
 - Imagens externas (hero, logos de parceiros, timeline recente) permanecem em URLs remotas.
 - Duas cópias do projeto podem existir no drive (`2026 WEB DESIGN` e `2026_WEB DESIGN`); manter sincronizadas via Git.

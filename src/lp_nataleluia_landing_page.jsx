@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import BorderGlow from "./BorderGlow.jsx";
+import AccessibilityWidget, { AccessibilitySymbol } from "./AccessibilityWidget.jsx";
 
 const LOGO_URL = "./assets/logo-nataleluia.png";
 const HERO_VIDEO_URL = "./assets/hero.mp4";
@@ -86,6 +87,7 @@ function getInitialPage() {
 }
 
 function handlePageNav(page, { setOpen, setCurrentPage } = {}) {
+  window.dispatchEvent(new CustomEvent("ticket-popup-navigation", { detail: page }));
   setOpen?.(false);
   setCurrentPage?.(page);
   window.requestAnimationFrame(() => {
@@ -403,9 +405,11 @@ function Header({ blur, bgOpacity, open, setOpen, currentPage, setCurrentPage })
                 >
                   Meu ingresso
                 </button>
+                <button type="button" className="a11y-trigger" title="Opções de acessibilidade" aria-label="Opções de acessibilidade" aria-haspopup="dialog" onClick={() => window.dispatchEvent(new Event("open-accessibility"))}><AccessibilitySymbol /></button>
               </div>
             </nav>
 
+            <button type="button" className="a11y-trigger a11y-mobile-trigger lg:hidden" title="Opções de acessibilidade" aria-label="Opções de acessibilidade" aria-haspopup="dialog" onClick={() => window.dispatchEvent(new Event("open-accessibility"))}><AccessibilitySymbol /></button>
             <button
               className="ml-auto rounded-full border border-white/15 p-2 text-white lg:hidden"
               style={{ pointerEvents: "auto" }}
@@ -462,6 +466,7 @@ function Header({ blur, bgOpacity, open, setOpen, currentPage, setCurrentPage })
               >
                 MEU INGRESSO
               </button>
+              <button type="button" className="a11y-trigger mb-4" title="Opções de acessibilidade" aria-label="Opções de acessibilidade" aria-haspopup="dialog" onClick={() => { setOpen(false); window.dispatchEvent(new Event("open-accessibility")); }}><AccessibilitySymbol /></button>
               {navItems.map((item) =>
                 renderNavItem(item, {
                   setOpen,
@@ -1341,6 +1346,8 @@ function SponsorsBanner() {
 }
 
 function CheckoutPage() {
+  const sectionRef = useRef(null);
+  useStarCursor(sectionRef);
   useEffect(() => {
     // Adapt the documented Card Spread spring/hover behavior to the existing links.
     const row = document.querySelector("#ingresso .checkout-tickets");
@@ -1471,7 +1478,11 @@ function CheckoutPage() {
   ];
 
   return (
-    <section id="ingresso" className="checkout-fit relative bg-[#411010] px-4">
+    <section ref={sectionRef} id="ingresso" className="checkout-fit n2026-section relative overflow-hidden px-4">
+      <div className="n2026-stage-lights" aria-hidden="true">
+        {Array.from({ length: 8 }, (_, index) => <span key={index} className={`n2026-beam n2026-beam-${index + 1}`} />)}
+      </div>
+      <div className="n2026-spotlight" aria-hidden="true" />
       <style>{`
         .checkout-fit { height: 100dvh; padding-top: min(142px, 22dvh); padding-bottom: 12px; box-sizing: border-box; }
         .checkout-fit > .checkout-content { height: 100%; min-height: 0; }
@@ -1504,15 +1515,12 @@ function CheckoutPage() {
         <div className="checkout-layout">
           <div className="checkout-banner relative overflow-hidden rounded-[clamp(1.25rem,4vw,2rem)] border border-white/10">
             <img
-              src="./assets/images/nataleluia-2026-banner.png"
+              src="./assets/images/banner_nataleluia26_web.png"
               alt="Nataleluia 2026 — A Maior História de Todas"
               className="block h-auto w-full"
               loading="eager"
               decoding="async"
             />
-            <p className="absolute left-[76%] top-[76%] -translate-x-1/2 text-[clamp(8px,1.1vw,12px)] font-semibold uppercase tracking-[0.28em] text-[#f0ecb9]/88">
-              <N2026BrandMark />
-            </p>
           </div>
           <div className="checkout-dates min-w-0 text-center">
             <h2 className="mb-5 text-[clamp(12px,1.5vw,16px)] font-medium uppercase text-[#ffe3d2]">Escolha as datas da apresentação:</h2>
@@ -1611,8 +1619,7 @@ function N2026Footer() {
   );
 }
 
-function N2026Page({ setCurrentPage }) {
-  const sectionRef = useRef(null);
+function useStarCursor(sectionRef) {
   useEffect(() => {
     const section = sectionRef.current;
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -1725,6 +1732,11 @@ function N2026Page({ setCurrentPage }) {
       mouse.removeEventListener("change", configure);
     };
   }, []);
+}
+
+function N2026Page({ setCurrentPage }) {
+  const sectionRef = useRef(null);
+  useStarCursor(sectionRef);
   const cardRef = useRef(null);
   const [spotlight, setSpotlight] = useState({ x: 50, y: 42, active: false });
   const [cardTilt, setCardTilt] = useState({
@@ -1816,17 +1828,12 @@ function N2026Page({ setCurrentPage }) {
           >
             <div className="n2026-float-card-glow" aria-hidden="true" />
             <img
-              src="./assets/images/nataleluia-2026-banner.png"
+              src="./assets/images/banner_nataleluia26_web.png"
               alt="Nataleluia 2026 — A Maior História de Todas"
               className="block h-auto w-full"
               loading="eager"
               decoding="async"
             />
-            <div className="absolute left-[76%] top-[76%] z-[2] -translate-x-1/2">
-              <p className="text-[clamp(8px,1.1vw,12px)] font-semibold uppercase tracking-[0.28em] text-[#f0ecb9]/88">
-                <N2026BrandMark />
-              </p>
-            </div>
           </div>
 
           <div className="mx-auto mt-10 max-w-3xl text-center">
@@ -1922,7 +1929,80 @@ function Footer() {
   );
 }
 
+function TicketPopup() {
+  const dialogRef = useRef(null);
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    let previousOverflow;
+    let locked = false;
+    const restore = () => {
+      window.clearTimeout(timerRef.current);
+      if (locked) document.body.style.overflow = previousOverflow;
+      locked = false;
+    };
+    const show = () => {
+      window.clearTimeout(timerRef.current);
+      if (document.querySelector(".a11y-panel[open]")) {
+        timerRef.current = window.setTimeout(show, 500);
+        return;
+      }
+      if (!dialog.open) {
+        previousOverflow = document.body.style.overflow;
+        locked = true;
+        document.body.style.overflow = "hidden";
+        dialog.showModal();
+      }
+      timerRef.current = window.setTimeout(() => dialog.close(), 10000);
+    };
+    const initialTimer = window.setTimeout(show, 5000);
+    dialog.addEventListener("close", restore);
+    return () => {
+      window.clearTimeout(initialTimer);
+      dialog.removeEventListener("close", restore);
+      if (dialog.open) dialog.close();
+      restore();
+    };
+  }, []);
+
+  return (
+    <>
+      <style>{`
+        .ticket-popup { position: fixed; inset: 0; margin: auto; padding: 0; border: 0; width: min(624px, calc(62.4vw - 19.968px)); max-width: none; max-height: calc(100dvh - 48px); overflow: hidden; background: transparent; border-radius: 24px; box-shadow: 0 24px 90px #0006; }
+        .ticket-popup::backdrop { background: rgb(0 0 0 / 72%); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px); }
+        .ticket-popup img { display: block; width: 100%; height: auto; max-height: calc(100dvh - 48px); object-fit: contain; transform: scale(1.025); }
+        .ticket-popup[open] { animation: ticketPopupIn 650ms ease-out both; }
+        .ticket-popup[open]::backdrop { animation: ticketBackdropIn 650ms ease-out both; }
+        @keyframes ticketPopupIn { from { opacity: 0; translate: 0 12px; } to { opacity: 1; translate: 0 0; } }
+        @keyframes ticketBackdropIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (prefers-reduced-motion: reduce) { .ticket-popup[open], .ticket-popup[open]::backdrop { animation: none; } }
+        .ticket-popup-close { position: absolute; right: 10px; top: 10px; display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid #ffffff80; border-radius: 50%; background: #172416d9; color: white; font: 24px/1 Arial, sans-serif; cursor: pointer; }
+        .ticket-popup-close:focus-visible { outline: 3px solid white; outline-offset: 2px; }
+      `}</style>
+      <dialog ref={dialogRef} className="ticket-popup" aria-label="Centro de Formação da Primeira Igreja Batista de Curitiba">
+        <a href="https://centrodeformacao.org.br" target="_blank" rel="noopener noreferrer" aria-label="Visitar o site do Centro de Formação" style={{ display: "block" }}>
+        <img src="./assets/images/centro-formacao-popup.png" alt="Centro de Formação PIB Curitiba: dança, teatro, música, inglês, contraturno e circo. Saiba mais em centrodeformação.org.br ou (41) 3091-4491." />
+        </a>
+        <button type="button" className="ticket-popup-close" aria-label="Fechar aviso" onClick={() => dialogRef.current.close()}>×</button>
+      </dialog>
+    </>
+  );
+}
+
 export default function NataleluiaLandingPage() {
+  const [popupRequest, setPopupRequest] = useState({ page: null, id: 0 });
+  useEffect(() => {
+    const requestPopup = (event) => {
+      const page = event.detail;
+      setPopupRequest((previous) => ({
+        page: page === "checkout" || page === "n2026" ? page : null,
+        id: previous.id + 1,
+      }));
+    };
+    window.addEventListener("ticket-popup-navigation", requestPopup);
+    return () => window.removeEventListener("ticket-popup-navigation", requestPopup);
+  }, []);
   const [open, setOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(getInitialPage);
   const progress = useScrollProgress();
@@ -2881,6 +2961,8 @@ export default function NataleluiaLandingPage() {
       <div className="video-overlay" />
       <div className="fixed inset-0 z-[1] pointer-events-none noise opacity-10" />
 
+      {popupRequest.page === currentPage && (currentPage === "checkout" || currentPage === "n2026") && <TicketPopup key={popupRequest.id} />}
+      <AccessibilityWidget currentPage={currentPage} />
       <div className="page-shell">
         <Header blur={blur} bgOpacity={bgOpacity} open={open} setOpen={setOpen} currentPage={currentPage} setCurrentPage={setCurrentPage} />
         {currentPage === "checkout" ? (
