@@ -1,2 +1,0 @@
-﻿// LP app.js placeholder
-
