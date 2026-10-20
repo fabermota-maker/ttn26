@@ -10,7 +10,7 @@ const previewRuntime = {
   apply: "build",
   generateBundle() {
     this.emitFile({ type: "asset", fileName: "robots.txt", source: "User-agent: *\nAllow: /\n" });
-    for (const fileName of ["js/lp-boot.js", "js/landing-loader.js", "src/lp_nataleluia_landing_page.jsx", "src/BorderGlow.jsx", "src/AccessibilityWidget.jsx"]) {
+    for (const fileName of ["js/lp-boot.js", "js/landing-loader.js", "js/landing-loader-corrigido.js", "src/lp_nataleluia_landing_page.jsx", "src/BorderGlow.jsx", "src/AccessibilityWidget.jsx"]) {
       this.emitFile({ type: "asset", fileName, source: readFileSync(new URL(fileName, import.meta.url), "utf8") });
     }
   },
