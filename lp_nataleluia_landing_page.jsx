@@ -1564,15 +1564,6 @@ function N2026Footer() {
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-center gap-8 text-center">
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-            <div className="compromisso-adoracao-logo-wrap">
-              <img
-                src={COMPROMISSO_ADORACAO_LOGO_URL}
-                alt="Compromisso Adoração"
-                className="compromisso-adoracao-logo h-auto w-[min(120px,36vw)] object-contain opacity-95"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
             <img
               src={PIB_CURITIBA_LOGO_URL}
               alt="Primeira Igreja Batista de Curitiba"
@@ -1580,6 +1571,15 @@ function N2026Footer() {
               loading="lazy"
               decoding="async"
             />
+            <div className="compromisso-adoracao-logo-wrap">
+              <img
+                src={LOGO_URL}
+                alt="Nataleluia"
+                className="h-auto w-[min(120px,36vw)] object-contain opacity-95"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
           </div>
         </div>
 
